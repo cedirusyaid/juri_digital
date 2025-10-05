@@ -1,0 +1,76 @@
+Tentu, ini adalah versi final dari deskripsi rancangan aplikasi "Juri Digital", yang telah disesuaikan dengan struktur database serbaguna dan ditambahkan informasi mengenai teknologi yang digunakan.
+
+---
+
+### **Deskripsi Rancangan Aplikasi Penjurian "Juri Digital" (Versi Serbaguna)**
+
+"Juri Digital" adalah platform penjurian berbasis web yang dirancang sebagai solusi universal untuk mengelola berbagai jenis kompetisi secara efisien, akurat, dan transparan. Aplikasi ini berevolusi dari platform khusus website menjadi sebuah sistem fleksibel yang dapat mengakomodasi lomba desain grafis, aplikasi mobile, business plan, karya tulis, dan kompetisi lainnya.
+
+---
+
+### **1. Konsep dan Tujuan 🎯**
+
+* **Tujuan Utama**: Menyediakan satu platform terpusat untuk mengelola seluruh siklus hidup kompetisi, mulai dari pembuatan kriteria penilaian yang modular, manajemen peserta dengan beragam jenis karya, hingga proses penjurian dan rekapitulasi nilai otomatis.
+* **Konsep**: Sebuah ekosistem digital di mana **Administrator** memiliki kendali penuh untuk "merakit" sebuah kompetisi sesuai kebutuhannya, dan **Juri** mendapatkan pengalaman menilai yang terstruktur dan relevan dengan bidang keahliannya.
+* **Keunggulan**:
+    * **Serbaguna (Versatile)**: Tidak lagi terbatas pada satu jenis lomba. Struktur `entri_lomba` dengan kolom `JSON` memungkinkan pendaftaran karya apa pun.
+    * **Modular**: Sistem **Templat Penilaian** (`templat_penilaian`) memungkinkan panitia untuk membuat, menyimpan, dan menggunakan ulang set kriteria yang berbeda untuk setiap kompetisi.
+    * **Spesialisasi Juri**: Panitia dapat menugaskan juri untuk menilai indikator tertentu saja, memastikan penilaian dilakukan oleh ahli yang tepat (`akses_indikator_pengguna`).
+    * **Otomatisasi dan Akurasi**: Perhitungan skor akhir yang memperhitungkan bobot kompleks dilakukan secara *real-time* oleh sistem, menghilangkan risiko kesalahan manual.
+
+---
+
+### **2. Pengguna dan Hak Akses (Sistem RBAC)**
+
+Aplikasi ini didukung oleh sistem *Role-Based Access Control* (RBAC) yang matang, memanfaatkan tabel `users`, `roles`, dan `izin_akses`.
+
+* **Users (`users`)**: Setiap individu yang dapat login ke dalam sistem, memiliki detail pribadi dan kredensial yang aman.
+* **Peran (`roles`)**: Label fungsional yang mendefinisikan tanggung jawab umum seorang pengguna, seperti **'Administrator'** atau **'Juri'**.
+* **Izin Akses (`izin_akses`)**: Hak spesifik untuk melakukan sebuah aksi, contohnya `buat-kompetisi`, `kelola-templat`, atau `kirim-penilaian`. Izin ini melekat pada **Peran**, bukan langsung pada pengguna.
+* **Alur Kerja Hak Akses**:
+    1.  Seorang **User** akan ditetapkan memiliki satu atau lebih **Peran** (melalui `user_roles`).
+    2.  Setiap **Peran** telah dikonfigurasi dengan serangkaian **Izin Akses** (melalui `role_izin_akses`).
+    3.  Ketika user berinteraksi dengan aplikasi, sistem akan memvalidasi aksinya terhadap izin yang dimiliki oleh perannya, sehingga memastikan setiap pengguna hanya bisa mengakses fitur yang sesuai.
+
+---
+
+### **3. Alur Kerja Aplikasi 📝**
+
+Alur kerja aplikasi dirancang untuk menjadi logis dan adaptif terhadap berbagai skenario kompetisi.
+
+1.  **Tahap Persiapan (Administrator)**:
+    * **Manajemen Templat**: Admin membuat **Templat Penilaian** baru (`templat_penilaian`). Di dalam templat ini, ia mendefinisikan hierarki kriteria: `kategori_kriteria`, `indikator_kriteria`, dan `sub_indikator_kriteria`. Templat ini bisa disimpan dan digunakan lagi untuk lomba sejenis di masa depan.
+    * **Pembuatan Kompetisi**: Admin membuat **Kompetisi** baru (`kompetisi`) dan **memilih templat penilaian** yang relevan dari daftar yang sudah ada.
+    * **Manajemen Peserta**: Admin mendaftarkan karya peserta melalui tabel `entri_lomba`. Bergantung pada jenis kompetisinya, Admin akan mengisi kolom `detail_karya` (JSON) dengan informasi yang relevan (misalnya, URL untuk website, atau link unduh file untuk poster).
+    * **Penugasan Juri**: Admin menugaskan Juri (`users`) untuk kompetisi tersebut. Jika diperlukan, Admin dapat masuk ke menu spesialisasi untuk mengatur `akses_indikator_pengguna`, membatasi juri tertentu agar hanya bisa menilai indikator yang sesuai dengan keahliannya.
+
+2.  **Tahap Penilaian (Juri)**:
+    * Juri login dan melihat daftar karya (`entri_lomba`) yang ditugaskan kepadanya.
+    * Saat membuka sebuah karya, halaman penilaian akan secara cerdas menampilkan detail karya tersebut (misalnya, menampilkan gambar poster, atau menyediakan link ke aplikasi demo).
+    * Formulir penilaian yang ditampilkan hanya berisi **kriteria dari templat yang dipilih untuk kompetisi itu**, dan mungkin hanya menampilkan **indikator yang diizinkan** untuk juri tersebut.
+    * Juri memberikan skor dan catatan pada setiap `sub_indikator_kriteria`, yang disimpan dalam `detail_penilaian`. Proses ini dapat disimpan sebagai **draft** atau dikirim secara **final**.
+
+3.  **Tahap Rekapitulasi (Administrator)**:
+    * Admin memantau progres penilaian dari seluruh juri melalui dashboard.
+    * Setelah tenggat waktu berakhir, Admin mengakses menu rekapitulasi. Sistem secara otomatis mengkalkulasi skor total untuk setiap `entri_lomba` berdasarkan rata-rata skor juri dan bobot dari templat penilaian yang digunakan.
+    * Admin dapat melihat peringkat akhir, menelusuri detail penilaian dari setiap juri, dan mengekspor laporan akhir untuk keperluan dokumentasi dan pengumuman.
+
+---
+
+### **4. Spesifikasi Teknis 💻**
+
+Untuk memastikan pengembangan yang cepat, andal, dan modern, aplikasi ini akan dibangun menggunakan tumpukan teknologi berikut:
+
+* **Backend Framework**: **PHP CodeIgniter 3**. Framework ini dipilih karena performanya yang ringan, arsitektur modern (mendukung MVC), serta tingkat keamanan yang tinggi. CodeIgniter 3 memungkinkan pengembangan fitur-fitur kompleks pada aplikasi ini secara cepat dan terstruktur.
+* **Frontend Template**: **Admin LTE**. Tampilan antarmuka (UI) untuk halaman administrator dan juri akan diimplementasikan menggunakan template AdminLTE. Template berbasis Bootstrap ini dipilih karena desainnya yang profesional, bersih, responsif (mendukung tampilan desktop dan mobile), serta menyediakan komponen UI yang siap pakai (tabel, form, chart), sehingga mempercepat proses pengembangan antarmuka.
+* **Database**: **MySQL** atau **MariaDB**. Sistem manajemen basis data ini dipilih karena popularitasnya, keandalannya dalam mengelola data relasional, dan dukungan komunitas yang luas.
+
+---
+
+### **5. Fitur Utama Aplikasi ✨**
+
+* **Pustaka Templat Penilaian**: Admin dapat membangun koleksi templat kriteria untuk berbagai jenis lomba, mempercepat penyiapan event di masa depan.
+* **Dukungan Multi-Karya**: Menerima dan mengelola berbagai format karya peserta, dari link URL, file unggahan, hingga data terstruktur lainnya melalui satu tabel `entri_lomba`.
+* **Penjurian oleh Panel Ahli**: Memfasilitasi penjurian oleh panel juri dengan keahlian yang berbeda-beda, memastikan setiap aspek karya dinilai oleh orang yang paling kompeten.
+* **Manajemen Kompetisi Terpusat**: Mengelola beberapa kompetisi yang berjalan secara bersamaan, masing-masing dengan set aturan, peserta, dan juri yang unik.
+* **Laporan dan Analitik Dinamis**: Menghasilkan laporan akhir yang akurat dan dapat disesuaikan, memberikan wawasan mendalam tentang hasil kompetisi.
