@@ -11,7 +11,7 @@
 
 1.  **Clone repositori ini:**
     ```bash
-    git clone [URL_REPOSITORY_ANDA]
+    git clone git@github.com:cedirusyaid/juri_digital.git
     cd juri_digital
     ```
 
@@ -32,3 +32,10 @@
 
 5.  **Selesai!**
     - Arahkan web server Anda ke direktori `juri_digital` dan buka aplikasi di browser.
+
+## Akun Default
+
+Setelah instalasi selesai, Anda dapat login menggunakan akun Super Admin default:
+
+- **Email**: `admin@example.com`
+- **Password**: `admin`

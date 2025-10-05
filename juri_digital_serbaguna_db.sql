@@ -239,7 +239,6 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `nama`, `deskripsi`) VALUES
 (1, 'Admin Super', 'Administrator dengan akses penuh ke sistem dan semua lomba.'),
-(2, 'Admin Lomba', 'Administrator yang mengelola lomba-lomba tertentu.'),
 (3, 'Juri', 'Penilai yang memberikan skor dan umpan balik pada entri lomba.'),
 (5, 'user', 'user biasa');
 
@@ -345,27 +344,8 @@ CREATE TABLE `users` (
   `diperbarui_pada` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
 
-INSERT INTO `users` (`id`, `nama`, `email`, `kata_sandi`, `dibuat_pada`, `diperbarui_pada`) VALUES
-(4, 'Muhammad Rusyaid, S.Kom., M.Si.', 'uttibatu@gmail.com', '$2y$10$t1MXJnQG26zRapfpzgcP1eev13eq3une06.VtbUxmmt6THQuRJk7u', '2025-10-03 14:16:56', '2025-10-03 16:28:04'),
-(5, 'UT 2', 'uttibatu2@gmail.com', '$2y$10$EIeS9pdnx9tEXBV6JmJK/.W3YTkHQpBeldOBSz2yHH6jwGBZ0jAD.', '2025-10-03 16:28:38', '2025-10-03 16:28:38'),
-(6, 'DR. Mansyur, S.Pd, M.Si', 'mansyur@sinjaikab.go.id', '$2y$10$TQRaFb624YnJ32lmyOYedOyWMw.bqNUx/DOBdjgE5wujfRLP4hQvq', '2025-10-05 03:30:11', '2025-10-05 03:37:19'),
-(7, 'Muhammad Takdir, ST, M.I.Kom', 'mtakdir@sinjaikab.go.id', '$2y$10$.A.c2TuTJoe9R.b2/blf6e6SjYC2MPUB6ZdOeuyEmGowpzRP6reLi', '2025-10-05 03:30:11', '2025-10-05 03:41:31'),
-(8, 'Ika Mayasari, S.S, M.Si', 'ikamayasari@sinjaikab.go.id', '$2y$10$Em29TedZtMxObmZ4NaulXuKOQKi5jkM.oL0f0tpb9C/OdRVKGAugq', '2025-10-05 03:30:11', '2025-10-05 03:38:41'),
-(9, 'Haryanti Arief, S.Si, M.M', 'yantiarief@sinjaikab.go.id', '$2y$10$og65uUTNc5jZRywrn1byHudbfZErEAU1QwGjTJkqho/LD6iuHWH9i', '2025-10-05 03:30:11', '2025-10-05 03:39:20'),
-(10, 'Usman, S.H.', 'usman@sinjaikab.go.id', '$2y$10$GBUaiDnk6qpAerbGORn5J.e6RczjHzph8Jxzo1S5gCCR0fTVcizOK', '2025-10-05 03:30:11', '2025-10-05 03:39:56'),
-(11, 'Lutfi Hidayat', 'lutfihidayat@sinjaikab.go.id', '$2y$10$0DWiCOWeHtCqST29NCQ2HOXcBN.xar2basGOAbNZ9TygdZprsQF5.', '2025-10-05 03:30:11', '2025-10-05 03:40:21'),
-(12, 'Abd. Dzuljalali Wal Ikram, S.T', 'dzul@sinjaikab.go.id', '$2y$10$avu7lNs2SeFhdPxKSUEF5.rDbuttilkPwZZDXmMBIMzdg1NM04XWm', '2025-10-05 03:30:11', '2025-10-05 03:40:56'),
-(13, 'Ira Afrawati Nur, S.Kom', 'iraafrawati@sinjaikab.go.id', '$2y$10$7oOe14d/4YStx2FiCzsOseurYRFtx/iOEQKf4i.NCSH0dYgt69RFm', '2025-10-05 03:30:11', '2025-10-05 03:41:21');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user_roles`
---
 
 CREATE TABLE `user_roles` (
   `id_user` int(11) NOT NULL,
@@ -373,29 +353,20 @@ CREATE TABLE `user_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `nama`, `email`, `kata_sandi`) VALUES
+(1, 'Admin', 'admin@example.com', '$2y$10$dOEi48FYKqODyg2eyUoP5OTlJNULUG/7UJ23eMyahCtrfaO0qoRna');
+
+--
 -- Dumping data for table `user_roles`
 --
 
 INSERT INTO `user_roles` (`id_user`, `id_role`) VALUES
-(4, 1),
-(4, 2),
-(4, 3),
-(5, 3),
-(5, 5),
-(6, 3),
-(7, 3),
-(8, 3),
-(9, 3),
-(12, 1),
-(12, 2),
-(12, 3),
-(13, 1),
-(13, 2),
-(13, 3);
+(1, 1);
 
---
--- Indexes for dumped tables
---
+
 
 --
 -- Indexes for table `akses_indikator_pengguna`
@@ -592,7 +563,7 @@ ALTER TABLE `templat_penilaian`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
