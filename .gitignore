@@ -10,6 +10,7 @@ application/logs/*
 
 # Sensitive configuration files
 application/config/database.php
+assets/img/logo_sinjai.png
 
 composer.lock
 tests/mocks/database/ci_test.sqlite
@@ -33,3 +34,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+# Report & Documentation Files
+perencanaan_pengembangan_juri_digital.txt
+laporan_pengembangan_juri_digital.txt
