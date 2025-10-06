@@ -8,7 +8,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ">Competitions</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Competitions</a></li>
               <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi/view/' . $kompetisi['id']); ?>"><?php echo $kompetisi['nama']; ?></a></li>
               <li class="breadcrumb-item active">Edit Entry</li>
             </ol>
