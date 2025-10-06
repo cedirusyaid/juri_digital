@@ -25,9 +25,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="<?php echo base_url(); ?>" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -98,7 +95,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?php echo base_url(); ?>" class="brand-link">
-      <img src="<?php echo base_url('assets/img/logo_sinjai.png'); ?>" alt="Logo Sinjai" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <i class="fas fa-trophy brand-image elevation-3" style="opacity: .8; margin-left: 0.8rem; margin-right: 0.5rem;"></i>
       <span class="brand-text font-weight-light">Juri Digital</span>
     </a>
 
@@ -109,58 +106,57 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
+        <?php $controller = $this->router->fetch_class(); ?>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>" class="nav-link active">
+            <a href="<?php echo base_url(); ?>" class="nav-link <?php echo ($controller == 'dashboard' || $controller == 'welcome') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Dasbor
               </p>
             </a>
           </li>
-          <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && isset($_SESSION['administrator_role_id']) && in_array($_SESSION['administrator_role_id'], $_SESSION['role_ids'])): ?>
-          <li class="nav-item">
-            <a href="<?php echo base_url('users'); ?>" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Users
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('kompetisi'); ?>" class="nav-link">
-              <i class="nav-icon fas fa-trophy"></i> <!-- Using a trophy icon for competitions -->
-              <p>
-                Competitions
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('templat_penilaian'); ?>" class="nav-link">
-              <i class="nav-icon fas fa-clipboard-list"></i> <!-- Using a clipboard-list icon for templates -->
-              <p>
-                Evaluation Templates
-              </p>
-            </a>
-          </li>
+          <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && isset($_SESSION['administrator_role_id']) && in_array($_SESSION['administrator_role_id'], $_SESSION['role_ids'])) : ?>
+            <li class="nav-item">
+              <a href="<?php echo base_url('users'); ?>" class="nav-link <?php echo ($controller == 'users') ? 'active' : ''; ?>">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Pengguna
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('kompetisi'); ?>" class="nav-link <?php echo ($controller == 'kompetisi') ? 'active' : ''; ?>">
+                <i class="nav-icon fas fa-trophy"></i>
+                <p>
+                  Kompetisi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('templat_penilaian'); ?>" class="nav-link <?php echo ($controller == 'templat_penilaian') ? 'active' : ''; ?>">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>
+                  Templat Penilaian
+                </p>
+              </a>
+            </li>
           <?php endif; ?>
-          <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && in_array(3, $_SESSION['role_ids'])): // Assuming Juri role ID is 3 ?>
-          <li class="nav-item">
-            <a href="<?php echo base_url('penilaian'); ?>" class="nav-link">
-              <i class="nav-icon fas fa-gavel"></i> <!-- Using a gavel icon for assessments -->
-              <p>
-                My Assessments
-              </p>
-            </a>
-          </li>
+          <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && in_array(3, $_SESSION['role_ids'])) : // Assuming Juri role ID is 3 ?>
+            <li class="nav-item">
+              <a href="<?php echo base_url('penilaian'); ?>" class="nav-link <?php echo ($controller == 'penilaian') ? 'active' : ''; ?>">
+                <i class="nav-icon fas fa-gavel"></i>
+                <p>
+                  Penilaian Saya
+                </p>
+              </a>
+            </li>
           <?php endif; ?>
           <li class="nav-item">
             <a href="<?php echo base_url('auth/logout'); ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
-                Logout
+                Keluar
               </p>
             </a>
           </li>

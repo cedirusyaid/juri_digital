@@ -41,6 +41,7 @@ $this->load->view('templates/adminlte_header', $data);
         if ($this->form_validation->run() === FALSE)
         {
             $this->load->view('templates/adminlte_header', $data);
+            $this->load->view('users/create', $data);
             $this->load->view('templates/adminlte_footer');
         }
         else
