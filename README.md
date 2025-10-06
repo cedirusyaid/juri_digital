@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/img/logo_sinjai.png" alt="Logo Juri Digital" width="150">
+  <img src="assets/img/juri_digital.png" alt="Logo Juri Digital" width="150">
 </p>
 
 <h1 align="center">Juri Digital - Aplikasi Penjurian Serbaguna</h1>
