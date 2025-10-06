@@ -66,10 +66,3 @@ Setelah instalasi selesai, Anda dapat login menggunakan akun Super Admin default
 - **Password**: `admin`
 
 ## 📸 Screenshot
-
-_(Anda dapat menambahkan screenshot aplikasi di sini untuk membuatnya lebih menarik)_ 
-
-<!-- Contoh:
-![Halaman Login](link/ke/screenshot_login.png)
-![Halaman Dashboard](link/ke/screenshot_dashboard.png)
--->

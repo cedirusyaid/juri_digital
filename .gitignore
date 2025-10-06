@@ -38,3 +38,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 # Report & Documentation Files
 perencanaan_pengembangan_juri_digital.txt
 laporan_pengembangan_juri_digital.txt
+
+# Custom Git Scripts
+git_push.sh
+git_pull.sh

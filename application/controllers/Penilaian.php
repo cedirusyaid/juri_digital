@@ -5,14 +5,14 @@ class Penilaian extends CI_Controller {
 
     public function __construct()
     {
-        parent::__construct();
-        $this->load->model('Kompetisi_model');
-        $this->load->model('Entri_lomba_model');
-        $this->load->model('Penilaian_model');
-        $this->load->helper('url');
-        $this->load->library('session');
-        $this->load->library('form_validation');
-
+    parent::__construct();
+    $this->load->model('Kompetisi_model');
+    $this->load->model('Entri_lomba_model');
+    $this->load->model('Penilaian_model');
+    $this->load->helper('url');
+    $this->load->library('session');
+    $this->load->library('form_validation');
+    $this->load->helper('penilaian'); 
         // Ensure user is logged in and is a judge
         if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== TRUE) {
             redirect('auth/login');
@@ -115,6 +115,21 @@ class Penilaian extends CI_Controller {
 
     public function save_assessment()
     {
+    // DEBUG: Lihat data yang dikirim
+    echo "<pre>=== DEBUG PENILAIAN ===\n";
+    echo "Kompetisi ID: " . $this->input->post('kompetisi_id') . "\n";
+    echo "Entri Lomba ID: " . $this->input->post('entri_lomba_id') . "\n";
+    echo "Status: " . $this->input->post('status') . "\n";
+    echo "\nAssessment Details:\n";
+    
+    $assessment_details = $this->input->post('assessment_details');
+    foreach ($assessment_details as $sub_id => $detail) {
+        echo "Sub Indikator {$sub_id}: Skor={$detail['skor']}, Catatan='{$detail['catatan']}'\n";
+    }
+    
+    echo "\n=== END DEBUG ===</pre>";
+    // exit; // Uncomment sementara untuk debugging
+        
         $this->form_validation->set_rules('kompetisi_id', 'Kompetisi ID', 'required|numeric');
         $this->form_validation->set_rules('entri_lomba_id', 'Entri Lomba ID', 'required|numeric');
         $this->form_validation->set_rules('status', 'Status Penilaian', 'required|in_list[draft,terkirim]');

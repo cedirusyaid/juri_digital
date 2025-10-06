@@ -11,6 +11,67 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/admin_template/adminlte/plugins/fontawesome-free/css/all.min.css'); ?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/admin_template/adminlte/dist/css/adminlte.min.css'); ?>">
+  
+  <style>
+/* Style untuk dropdown yang invalid */
+.is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+/* Style untuk badge skor */
+.badge {
+    font-size: 0.9em;
+    padding: 8px 12px;
+}
+
+/* Optional: Style untuk membuat dropdown lebih menarik */
+.score-select {
+    transition: all 0.3s ease;
+}
+
+.score-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Style untuk score display dengan background secondary */
+.bg-secondary {
+    background-color: #6c757d !important;
+    color: white;
+}
+
+.bg-secondary .badge {
+    background-color: #495057 !important;
+    color: white;
+}
+
+/* Style untuk user icon di navbar */
+.user-icon-navbar {
+    width: 25px;
+    height: 25px;
+    background: #007bff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.user-icon-sidebar {
+    width: 33px;
+    height: 33px;
+    background: #007bff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+}
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -32,7 +93,9 @@
       <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE): ?>
         <li class="nav-item dropdown user-menu">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-            <img src="<?php echo base_url('assets/admin_template/adminlte/dist/img/user2-160x160.jpg'); ?>" class="user-image img-circle elevation-2" alt="User Image">
+            <div class="user-icon-navbar">
+              <i class="fas fa-user"></i>
+            </div>
             <span class="d-none d-md-inline"><?php echo $_SESSION['username']; ?>
             <?php if (isset($_SESSION['roles']) && is_array($_SESSION['roles'])): ?>
                 (<?php echo implode(', ', $_SESSION['roles']); ?>)
@@ -42,23 +105,30 @@
           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <!-- User image -->
             <li class="user-header bg-primary">
-              <img src="<?php echo base_url('assets/admin_template/adminlte/dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
+              <div class="user-icon-sidebar">
+                <i class="fas fa-user fa-2x"></i>
+              </div>
               <p>
-                <?php echo $_SESSION['username']; ?> - Web Developer
-                <small>Member since Nov. 2012</small>
+                <?php echo $_SESSION['username']; ?>
+                <small>
+                  <?php if (isset($_SESSION['roles']) && is_array($_SESSION['roles'])): ?>
+                    <?php echo implode(', ', $_SESSION['roles']); ?>
+                  <?php endif; ?>
+                </small>
+                <small>Member since <?php echo date('M. Y'); ?></small>
               </p>
             </li>
             <!-- Menu Body -->
             <li class="user-body">
               <div class="row">
                 <div class="col-4 text-center">
-                  <a href="#">Followers</a>
+                  <a href="#" class="text-muted">Profile</a>
                 </div>
                 <div class="col-4 text-center">
-                  <a href="#">Sales</a>
+                  <a href="#" class="text-muted">Settings</a>
                 </div>
                 <div class="col-4 text-center">
-                  <a href="#">Friends</a>
+                  <a href="#" class="text-muted">Help</a>
                 </div>
               </div>
               <!-- /.row -->
@@ -73,7 +143,7 @@
       <?php else: ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('auth/login'); ?>" role="button">
-            Login
+            <i class="fas fa-sign-in-alt mr-1"></i> Login
           </a>
         </li>
       <?php endif; ?>
@@ -95,14 +165,30 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?php echo base_url(); ?>" class="brand-link">
-            <i class="fas fa-trophy brand-image elevation-3" style="opacity: .8; margin-left: 0.8rem; margin-right: 0.5rem;"></i>
+      <i class="fas fa-trophy brand-image elevation-3" style="opacity: .8; margin-left: 0.8rem; margin-right: 0.5rem;"></i>
       <span class="brand-text font-weight-light">Juri Digital</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-
+      <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE): ?>
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <div class="user-icon-sidebar">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"><?php echo $_SESSION['username']; ?></a>
+          <small class="text-light">
+            <?php if (isset($_SESSION['roles']) && is_array($_SESSION['roles'])): ?>
+              <?php echo implode(', ', $_SESSION['roles']); ?>
+            <?php endif; ?>
+          </small>
+        </div>
+      </div>
+      <?php endif; ?>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -111,53 +197,47 @@
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>" class="nav-link <?php echo ($controller == 'dashboard' || $controller == 'welcome') ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dasbor
-              </p>
+              <p>Dasbor</p>
             </a>
           </li>
           <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && isset($_SESSION['administrator_role_id']) && in_array($_SESSION['administrator_role_id'], $_SESSION['role_ids'])) : ?>
             <li class="nav-item">
               <a href="<?php echo base_url('users'); ?>" class="nav-link <?php echo ($controller == 'users') ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Pengguna
-                </p>
+                <p>Pengguna</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('kompetisi'); ?>" class="nav-link <?php echo ($controller == 'kompetisi') ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-trophy"></i>
-                <p>
-                  Kompetisi
-                </p>
+                <p>Kompetisi</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('templat_penilaian'); ?>" class="nav-link <?php echo ($controller == 'templat_penilaian') ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>
-                  Templat Penilaian
-                </p>
+                <p>Templat Penilaian</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('juri_assignment'); ?>" class="nav-link <?php echo ($controller == 'juri_assignment') ? 'active' : ''; ?>">
+                <i class="nav-icon fas fa-user-tie"></i>
+                <p>Penugasan Juri</p>
               </a>
             </li>
           <?php endif; ?>
-          <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && in_array(3, $_SESSION['role_ids'])) : // Assuming Juri role ID is 3 ?>
+          <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && in_array(3, $_SESSION['role_ids'])) : ?>
             <li class="nav-item">
               <a href="<?php echo base_url('penilaian'); ?>" class="nav-link <?php echo ($controller == 'penilaian') ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-gavel"></i>
-                <p>
-                  Penilaian Saya
-                </p>
+                <p>Penilaian Saya</p>
               </a>
             </li>
           <?php endif; ?>
           <li class="nav-item">
             <a href="<?php echo base_url('auth/logout'); ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                Keluar
-              </p>
+              <p>Keluar</p>
             </a>
           </li>
         </ul>
@@ -169,8 +249,4 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-
-
-    <!-- Main content -->
-    <!-- <div class="content"> -->
-      <div class="container-fluid">
+    <div class="container-fluid">
