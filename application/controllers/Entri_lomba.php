@@ -210,7 +210,7 @@ class Entri_lomba extends CI_Controller {
         $data['username'] = $this->session->userdata('username');
         $data['roles'] = $this->session->userdata('roles');
 
-        $data['all_judges'] = $this->user_model->get_all_judges();
+        $data['all_judges'] = $this->user_model->get_users_by_role('Juri');
         $assigned_judges_raw = $this->entri_lomba_model->get_assigned_judges_for_entry($id);
         $data['assigned_judge_ids'] = array_column($assigned_judges_raw, 'id');
 
