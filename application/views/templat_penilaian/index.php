@@ -24,7 +24,7 @@
               <div class="card-header">
                 <h3 class="card-title">Daftar Templat Penilaian</h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('templat_penilaian/create'); ?>" class="btn btn-primary btn-sm">Tambah Templat Baru</a>
+                  <a href="<?php echo base_url('templat_penilaian/create'); ?>" class="btn btn-primary btn-sm" title="Tambah Templat Baru"><i class="fas fa-plus"></i></a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -63,13 +63,15 @@
                         <td><?php echo $template['nama_templat']; ?></td>
                         <td><?php echo $template['deskripsi']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('templat_penilaian/view/' . $template['id']); ?>" class="btn btn-info btn-sm">Lihat</a>
-                          <a href="<?php echo base_url('templat_penilaian/edit/' . $template['id']); ?>" class="btn btn-warning btn-sm">Ubah</a>
-                          <?php
-                          $disabled = $template['is_in_use'];
-                          $title = $disabled ? 'Tidak dapat menghapus templat yang sedang digunakan oleh kompetisi' : 'Hapus templat';
-                          ?>
-                          <a href="<?php echo base_url('templat_penilaian/delete/' . $template['id']); ?>" class="btn btn-danger btn-sm <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Apakah Anda yakin ingin menghapus templat ini?\')' ?>;">Hapus</a>
+                          <div class="btn-group">
+                            <a href="<?php echo base_url('templat_penilaian/view/' . $template['id']); ?>" class="btn btn-info btn-sm" title="Info"><i class="fas fa-info-circle"></i></a>
+                            <a href="<?php echo base_url('templat_penilaian/edit/' . $template['id']); ?>" class="btn btn-warning btn-sm" title="Ubah"><i class="fas fa-edit"></i></a>
+                            <?php
+                            $disabled = $template['is_in_use'];
+                            $title = $disabled ? 'Tidak dapat menghapus templat yang sedang digunakan oleh kompetisi' : 'Hapus templat';
+                            ?>
+                            <a href="<?php echo base_url('templat_penilaian/delete/' . $template['id']); ?>" class="btn btn-danger btn-sm <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Apakah Anda yakin ingin menghapus templat ini?\')' ?>;"><i class="fas fa-trash"></i></a>
+                          </div>
                         </td>
                       </tr>
                       <?php endforeach; ?>

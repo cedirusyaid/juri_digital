@@ -1,0 +1,103 @@
+======================================================================
+             LAPORAN PENGEMBANGAN APLIKASI
+                         JURI DIGITAL
+======================================================================
+
+**BAB I: PENDAHULUAN**
+
+1.1. Latar Belakang Proyek
+    Proyek ini bertujuan untuk mengembangkan aplikasi "Juri Digital", sebuah platform penjurian berbasis web yang dirancang untuk menjadi solusi universal dalam mengelola berbagai jenis kompetisi. Pengembangan ini didasari oleh kebutuhan akan adanya sistem yang efisien, transparan, dan akurat untuk menggantikan proses penjurian manual.
+
+1.2. Tujuan Pengembangan
+    Tujuan dari pengembangan yang telah dilakukan adalah untuk merealisasikan sebuah aplikasi dengan fitur-fitur berikut:
+    a. Sistem manajemen kompetisi yang terpusat.
+    b. Skema penilaian yang modular dan dapat digunakan kembali.
+    c. Panel penjurian yang intuitif bagi para juri.
+    d. Perhitungan skor otomatis berdasarkan bobot untuk mengurangi kesalahan.
+    e. Sistem otentikasi dan manajemen pengguna berbasis peran.
+
+
+**BAB II: HASIL PENGEMBANGAN**
+
+2.1. Arsitektur Aplikasi
+    Aplikasi "Juri Digital" telah berhasil dikembangkan menggunakan pola arsitektur Model-View-Controller (MVC) dengan spesifikasi teknis sebagai berikut:
+    - **Framework Backend**: PHP CodeIgniter 3
+    - **Framework Frontend**: AdminLTE 3 (berbasis Bootstrap)
+    - **Database**: MySQL / MariaDB
+
+2.2. Fitur yang Telah Diimplementasikan
+    Berikut adalah fitur-fitur utama yang telah berhasil diimplementasikan dalam aplikasi:
+    a. **Dashboard Utama**: Menampilkan ringkasan data statistik aplikasi seperti jumlah total kompetisi, entri lomba, juri, dan pengguna.
+    b. **Manajemen Pengguna**: Sistem otentikasi (login/logout) dan pengelolaan pengguna dengan hak akses berbasis peran (Super Admin, Juri, dll.).
+    c. **Manajemen Kompetisi**: Fitur untuk membuat, melihat, mengubah, dan menghapus data kompetisi.
+    d. **Manajemen Templat Penilaian**: Fitur untuk membuat skema penilaian yang terdiri dari kategori, indikator, dan sub-indikator, lengkap dengan bobotnya masing-masing.
+    e. **Panel Penjurian**: Halaman khusus bagi juri untuk memberikan skor dan catatan pada setiap kriteria dari karya yang dinilai.
+    f. **Penugasan Juri**: Fitur untuk menugaskan juri pada entri lomba tertentu.
+
+
+**BAB III: PANDUAN PENGGUNA**
+
+3.1. Instalasi Aplikasi
+    Langkah-langkah untuk melakukan instalasi dan deployment aplikasi adalah sebagai berikut:
+    1. Clone repositori dari GitHub.
+    2. Lakukan instalasi dependensi melalui Composer.
+    3. Buat file `database.php` dari file `database.php.example` dan sesuaikan kredensialnya.
+    4. Import file `juri_digital_serbaguna_db.sql` ke dalam database.
+    5. Arahkan web server ke direktori aplikasi.
+
+3.2. Akun Default
+    Setelah instalasi, aplikasi menyediakan satu akun Super Admin yang dapat digunakan untuk login pertama kali:
+    - **Email**: `admin@example.com`
+    - **Password**: `admin`
+
+
+**BAB IV: SCREENSHOT APLIKASI**
+
+*Catatan: Silakan ambil screenshot dari aplikasi Anda dan sisipkan gambar-gambar tersebut pada bagian yang sesuai di bawah ini saat mengonversinya ke dalam format Word.*
+
+4.1. Halaman Login
+
+    [--- SISIPKAN SCREENSHOT HALAMAN LOGIN DI SINI ---]
+
+    *Deskripsi: Tampilan halaman login untuk semua pengguna.*
+
+
+4.2. Halaman Dashboard
+
+    [--- SISIPKAN SCREENSHOT HALAMAN DASHBOARD DI SINI ---]
+
+    *Deskripsi: Tampilan utama setelah login, berisi ringkasan data aplikasi.*
+
+
+4.3. Halaman Manajemen Kompetisi
+
+    [--- SISIPKAN SCREENSHOT HALAMAN DAFTAR KOMPETISI DI SINI ---]
+
+    *Deskripsi: Halaman untuk mengelola data kompetisi yang ada.*
+
+
+4.4. Halaman Formulir Penilaian
+
+    [--- SISIPKAN SCREENSHOT HALAMAN PENILAIAN JURI DI SINI ---]
+
+    *Deskripsi: Tampilan panel yang digunakan oleh juri untuk memberikan skor dan catatan.*
+
+
+4.5. Halaman Hasil Penilaian
+
+    [--- SISIPKAN SCREENSHOT HALAMAN REKAPITULASI NILAI DI SINI ---]
+
+    *Deskripsi: Contoh tampilan halaman hasil akhir atau rekapitulasi skor.*
+
+
+**BAB V: PENUTUP**
+
+5.1. Kesimpulan
+    Aplikasi "Juri Digital" telah berhasil dikembangkan sesuai dengan perencanaan dan tujuan yang ditetapkan. Aplikasi ini kini berfungsi sebagai platform yang solid untuk manajemen dan pelaksanaan penjurian kompetisi secara digital. Semua fitur inti, mulai dari manajemen kompetisi hingga proses penilaian, telah diimplementasikan dan siap untuk digunakan.
+
+5.2. Saran Pengembangan Lanjutan
+    Untuk pengembangan di masa depan, beberapa fitur dapat ditambahkan untuk meningkatkan fungsionalitas aplikasi, antara lain:
+    a. Fitur ekspor laporan ke format PDF atau Excel.
+    b. Notifikasi email kepada juri ketika ada tugas penilaian baru.
+    c. Halaman publik untuk menampilkan pemenang dari setiap kompetisi.
+    d. Kustomisasi tema dan tampilan yang lebih mendalam.

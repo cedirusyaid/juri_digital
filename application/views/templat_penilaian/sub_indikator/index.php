@@ -28,7 +28,7 @@
               <div class="card-header">
                 <h3 class="card-title">Sub-Indikator untuk <?php echo $indikator['nama']; ?></h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('templat_penilaian/sub_indikator_create/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-primary btn-sm">Tambah Sub-Indikator Baru</a>
+                  <a href="<?php echo base_url('templat_penilaian/sub_indikator_create/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-primary btn-sm" title="Tambah Sub-Indikator Baru"><i class="fas fa-plus"></i></a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -67,8 +67,8 @@
                         <td><?php echo $sub_indikator['nama']; ?></td>
                         <td><?php echo $sub_indikator['urutan_tampil']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_edit/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-warning btn-sm">Ubah</a>
-                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_delete/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus sub-indikator ini?')">Hapus</a>
+                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_edit/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-warning btn-sm" title="Ubah"><i class="fas fa-edit"></i></a>
+                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_delete/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-danger btn-sm" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus sub-indikator ini?')"><i class="fas fa-trash"></i></a>
                         </td>
                       </tr>
                       <?php endforeach; ?>

@@ -27,7 +27,7 @@
               <div class="card-header">
                 <h3 class="card-title">Indicators for <?php echo $kategori['nama']; ?></h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('templat_penilaian/indikator_create/' . $template['id'] . '/' . $kategori['id']); ?>" class="btn btn-primary btn-sm">Add New Indicator</a>
+                  <a href="<?php echo base_url('templat_penilaian/indikator_create/' . $template['id'] . '/' . $kategori['id']); ?>" class="btn btn-primary btn-sm" title="Tambah Indikator Baru"><i class="fas fa-plus"></i></a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -66,8 +66,8 @@
                         <td><?php echo $indikator['nama']; ?></td>
                         <td><?php echo $indikator['bobot']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('templat_penilaian/indikator_edit/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="<?php echo base_url('templat_penilaian/indikator_delete/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this indicator?')">Delete</a>
+                          <a href="<?php echo base_url('templat_penilaian/indikator_edit/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-warning btn-sm" title="Ubah"><i class="fas fa-edit"></i></a>
+                          <a href="<?php echo base_url('templat_penilaian/indikator_delete/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-danger btn-sm" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus indikator ini?')"><i class="fas fa-trash"></i></a>
                         </td>
                       </tr>
                       <?php endforeach; ?>

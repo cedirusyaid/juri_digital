@@ -26,7 +26,7 @@
               <div class="card-header">
                 <h3 class="card-title">Daftar Entri untuk <?php echo $kompetisi['nama']; ?></h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('entri_lomba/create/' . $kompetisi['id']); ?>" class="btn btn-primary btn-sm">Tambah Entri Baru</a>
+                  <a href="<?php echo base_url('entri_lomba/create/' . $kompetisi['id']); ?>" class="btn btn-primary btn-sm" title="Tambah Entri Baru"><i class="fas fa-plus"></i></a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -65,10 +65,12 @@
                         <td><?php echo $entry['nama_karya']; ?></td>
                         <td><?php echo $entry['deskripsi']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('entri_lomba/view/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-info btn-sm">Lihat</a>
-                          <a href="<?php echo base_url('entri_lomba/edit/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-warning btn-sm">Ubah</a>
-                          <a href="<?php echo base_url('entri_lomba/manage_juri/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-primary btn-sm">Kelola Juri</a>
-                          <a href="<?php echo base_url('entri_lomba/delete/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus entri ini?')">Hapus</a>
+                          <div class="btn-group">
+                            <a href="<?php echo base_url('entri_lomba/view/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-info btn-sm" title="Info"><i class="fas fa-info-circle"></i></a>
+                            <a href="<?php echo base_url('entri_lomba/edit/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-warning btn-sm" title="Ubah"><i class="fas fa-edit"></i></a>
+                            <a href="<?php echo base_url('entri_lomba/manage_juri/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-primary btn-sm" title="Kelola Juri"><i class="fas fa-users"></i></a>
+                            <a href="<?php echo base_url('entri_lomba/delete/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-danger btn-sm" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus entri ini?')"><i class="fas fa-trash"></i></a>
+                          </div>
                         </td>
                       </tr>
                       <?php endforeach; ?>

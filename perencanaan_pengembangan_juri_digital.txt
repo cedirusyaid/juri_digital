@@ -1,0 +1,100 @@
+======================================================================
+            DOKUMEN PERENCANAAN PENGEMBANGAN APLIKASI
+                           JURI DIGITAL
+======================================================================
+
+**BAB I: PENDAHULUAN**
+
+1.1. Latar Belakang
+    Dalam era digital, proses penjurian kompetisi seringkali masih dilakukan secara manual, yang rentan terhadap kesalahan, memakan waktu, dan kurang transparan. Untuk mengatasi tantangan ini, diperlukan sebuah platform digital yang dapat memfasilitasi seluruh alur kerja penjurian secara efisien. Aplikasi "Juri Digital" dirancang sebagai solusi serbaguna untuk menjawab kebutuhan tersebut, menyediakan platform yang fleksibel untuk berbagai jenis kompetisi.
+
+1.2. Tujuan
+    Tujuan utama dari pengembangan aplikasi "Juri Digital" adalah:
+    a. Menyediakan satu platform terpusat untuk mengelola seluruh siklus hidup kompetisi.
+    b. Meningkatkan efisiensi dan akurasi dalam proses penilaian melalui otomatisasi perhitungan skor.
+    c. Menciptakan proses penjurian yang transparan dan terstruktur.
+    d. Membangun sistem yang modular dan fleksibel sehingga dapat digunakan kembali untuk berbagai jenis kompetisi di masa depan.
+
+1.3. Ruang Lingkup
+    Ruang lingkup aplikasi mencakup:
+    a. Manajemen Pengguna: Pengelolaan akun untuk Administrator, Juri, dan peran lainnya.
+    b. Manajemen Kompetisi: Pembuatan dan pengelolaan detail kompetisi.
+    c. Manajemen Templat Penilaian: Pembuatan skema dan kriteria penilaian yang dapat disesuaikan.
+    d. Proses Penjurian: Panel bagi juri untuk memberikan nilai dan catatan pada karya peserta.
+    e. Rekapitulasi Hasil: Perhitungan dan penyajian hasil akhir penilaian secara otomatis.
+
+
+**BAB II: DESKRIPSI UMUM**
+
+2.1. Konsep Aplikasi
+    "Juri Digital" adalah sebuah ekosistem digital di mana Administrator memiliki kendali penuh untuk "merakit" sebuah kompetisi sesuai kebutuhannya. Konsep utamanya adalah modularitas, di mana templat penilaian dapat dibuat, disimpan, dan digunakan ulang. Juri mendapatkan pengalaman menilai yang terstruktur dan relevan dengan bidang keahliannya, bahkan dapat ditugaskan untuk menilai indikator spesifik.
+
+2.2. Pengguna dan Peran (Role-Based Access Control)
+    Aplikasi akan mengimplementasikan sistem hak akses berbasis peran (RBAC) dengan peran utama sebagai berikut:
+    a. **Super Admin**: Memiliki akses penuh ke seluruh sistem, termasuk manajemen semua kompetisi dan pengguna.
+    b. **Admin Lomba**: Mengelola kompetisi tertentu yang ditugaskan kepadanya.
+    c. **Juri**: Memberikan penilaian (skor dan umpan balik) pada entri lomba yang ditugaskan.
+
+2.3. Fitur Utama yang Direncanakan
+    a. Pustaka Templat Penilaian
+    b. Dukungan Multi-Format Karya Peserta
+    c. Penugasan Juri dengan Spesialisasi
+    d. Manajemen Kompetisi Terpusat
+    e. Laporan dan Analitik Dinamis
+
+
+**BAB III: RANCANGAN TEKNIS**
+
+3.1. Arsitektur Sistem
+    Aplikasi akan dibangun menggunakan pola arsitektur Model-View-Controller (MVC) untuk memisahkan logika bisnis, data, dan antarmuka pengguna. Pola ini memastikan kode yang terstruktur, mudah dikelola, dan skalabel.
+
+3.2. Spesifikasi Teknologi
+    a. **Bahasa Pemrograman**: PHP 7.4 atau lebih tinggi.
+    b. **Framework Backend**: CodeIgniter 3.
+    c. **Framework Frontend**: AdminLTE 3 (berbasis Bootstrap).
+    d. **Database**: MySQL atau MariaDB.
+    e. **Web Server**: Apache atau Nginx.
+
+3.3. Rancangan Database
+    Struktur database akan dirancang secara relasional untuk mendukung fitur-fitur yang direncanakan. Tabel-tabel kunci akan mencakup:
+    - `users`, `roles`: Untuk manajemen pengguna dan hak akses.
+    - `kompetisi`, `entri_lomba`: Untuk mengelola detail kompetisi dan karya peserta.
+    - `templat_penilaian`, `kategori_kriteria`, `indikator_kriteria`: Untuk membangun skema penilaian yang modular.
+    - `penilaian`, `detail_penilaian`: Untuk menyimpan hasil skor dan catatan dari juri.
+
+
+**BAB IV: RENCANA IMPLEMENTASI**
+
+4.1. Tahapan Pengembangan (Milestones)
+    a. **Fase 1: Inisialisasi dan Desain (Sprint 1)**
+       - Setup lingkungan pengembangan.
+       - Desain dan pembuatan struktur database awal.
+       - Implementasi sistem otentikasi (login, logout) dan manajemen pengguna dasar.
+
+    b. **Fase 2: Fitur Inti (Sprint 2-3)**
+       - Implementasi CRUD (Create, Read, Update, Delete) untuk Manajemen Kompetisi.
+       - Implementasi CRUD untuk Manajemen Templat Penilaian (termasuk kategori dan indikator).
+       - Implementasi pendaftaran entri lomba.
+
+    c. **Fase 3: Fitur Penjurian (Sprint 4)**
+       - Pembuatan halaman panel penjurian untuk juri.
+       - Implementasi logika penyimpanan skor dan catatan (draft & final).
+       - Penugasan juri ke entri lomba.
+
+    d. **Fase 4: Laporan dan Finalisasi (Sprint 5)**
+       - Pengembangan fitur rekapitulasi dan laporan hasil.
+       - Pengujian menyeluruh (testing) dan perbaikan bug.
+       - Persiapan untuk deployment.
+
+4.2. Perkiraan Jadwal
+    - **Sprint 1**: Minggu 1
+    - **Sprint 2**: Minggu 2
+    - **Sprint 3**: Minggu 3
+    - **Sprint 4**: Minggu 4
+    - **Sprint 5**: Minggu 5
+    *Catatan: Jadwal bersifat tentatif dan dapat disesuaikan.* 
+
+
+**BAB V: PENUTUP**
+
+Dokumen perencanaan ini menjadi acuan utama dalam proses pengembangan aplikasi "Juri Digital". Perubahan atau penyesuaian terhadap rencana ini akan didokumentasikan dan disetujui oleh para pemangku kepentingan untuk memastikan proyek berjalan sesuai dengan tujuan yang telah ditetapkan.

@@ -7,14 +7,14 @@
           </div>
           <div class="col-sm-6">
             <div class="btn-group float-sm-right">
-              <a href="<?php echo base_url('skema_entri/index/' . $template['id']); ?>" class="btn btn-info">Kelola Skema Entri</a>
-              <a href="<?php echo base_url('templat_penilaian'); ?>" class="btn btn-secondary">Kembali ke Daftar</a>
-              <a href="<?php echo base_url('templat_penilaian/edit/' . $template['id']); ?>" class="btn btn-warning">Ubah Templat</a>
+              <a href="<?php echo base_url('skema_entri/index/' . $template['id']); ?>" class="btn btn-info" title="Kelola Skema Entri"><i class="fas fa-list-alt"></i></a>
+              <a href="<?php echo base_url('templat_penilaian'); ?>" class="btn btn-secondary" title="Kembali ke Daftar"><i class="fas fa-arrow-left"></i></a>
+              <a href="<?php echo base_url('templat_penilaian/edit/' . $template['id']); ?>" class="btn btn-warning" title="Ubah Templat"><i class="fas fa-edit"></i></a>
               <?php
               $disabled = $template['is_in_use'];
               $title = $disabled ? 'Tidak dapat menghapus templat yang sedang digunakan oleh kompetisi' : 'Hapus templat';
               ?>
-              <a href="<?php echo base_url('templat_penilaian/delete/' . $template['id']); ?>" class="btn btn-danger <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Apakah Anda yakin ingin menghapus templat ini?\')' ?>;">Hapus Templat</a>
+              <a href="<?php echo base_url('templat_penilaian/delete/' . $template['id']); ?>" class="btn btn-danger <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Apakah Anda yakin ingin menghapus templat ini?\')' ?>;"><i class="fas fa-trash"></i></a>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
                 <hr>
 
                 <h4><i class="fas fa-layer-group mr-1"></i> Kategori Kriteria
-                    <a href="<?php echo base_url('templat_penilaian/kategori_create/' . $template['id']); ?>" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> Tambah Kategori Baru</a>
+                    <a href="<?php echo base_url('templat_penilaian/kategori_create/' . $template['id']); ?>" class="btn btn-success btn-sm float-right" title="Tambah Kategori Baru"><i class="fas fa-plus"></i></a>
                 </h4>
                 <?php if (!empty($kategori_kriteria)): ?>
                     <?php foreach ($kategori_kriteria as $kategori): ?>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="card-body">
                                 <h5><i class="fas fa-list-ol mr-1"></i> Indikator
-                                    <a href="<?php echo base_url('templat_penilaian/indikator_create/' . $template['id'] . '/' . $kategori['id']); ?>" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> Tambah Indikator Baru</a>
+                                    <a href="<?php echo base_url('templat_penilaian/indikator_create/' . $template['id'] . '/' . $kategori['id']); ?>" class="btn btn-success btn-sm float-right" title="Tambah Indikator Baru"><i class="fas fa-plus"></i></a>
                                 </h5>
                                 <?php if (!empty($kategori['indikator_kriteria'])): ?>
                                     <?php foreach ($kategori['indikator_kriteria'] as $indikator): ?>
@@ -77,7 +77,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <h6><i class="fas fa-tasks mr-1"></i> Sub-Indikator
-                                                    <a href="<?php echo base_url('templat_penilaian/sub_indikator_create/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> Tambah Sub-Indikator Baru</a>
+                                                    <a href="<?php echo base_url('templat_penilaian/sub_indikator_create/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-success btn-sm float-right" title="Tambah Sub-Indikator Baru"><i class="fas fa-plus"></i></a>
                                                 </h6>
                                                 <?php if (!empty($indikator['sub_indikator_kriteria'])): ?>
                                                     <ul class="list-group">

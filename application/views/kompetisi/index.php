@@ -24,7 +24,7 @@
               <div class="card-header">
                 <h3 class="card-title">Daftar Kompetisi</h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('kompetisi/create'); ?>" class="btn btn-primary btn-sm">Tambah Kompetisi Baru</a>
+                  <a href="<?php echo base_url('kompetisi/create'); ?>" class="btn btn-primary btn-sm" title="Tambah Kompetisi Baru"><i class="fas fa-plus"></i></a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -65,16 +65,18 @@
                         <td><?php echo $item['tanggal_mulai']; ?></td>
                         <td><?php echo $item['tanggal_selesai']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('kompetisi/view/' . $item['id']); ?>" class="btn btn-info btn-sm">Lihat</a>
-                          <a href="<?php echo base_url('kompetisi/edit/' . $item['id']); ?>" class="btn btn-warning btn-sm">Ubah</a>
-                          <?php
-                          $disabled = $item['has_entries'];
-                          $title = $disabled ? 'Tidak dapat menghapus kompetisi yang sudah memiliki entri' : 'Hapus kompetisi';
-                          ?>
-                          <a href="<?php echo base_url('kompetisi/delete/' . $item['id']); ?>" class="btn btn-danger btn-sm <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Apakah Anda yakin ingin menghapus kompetisi ini?\')' ?>;">Hapus</a>
-                          <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && isset($_SESSION['administrator_role_id']) && in_array($_SESSION['administrator_role_id'], $_SESSION['role_ids'])): ?>
-                          <a href="<?php echo base_url('kompetisi/results/' . $item['id']); ?>" class="btn btn-success btn-sm">Lihat Hasil</a>
-                          <?php endif; ?>
+                          <div class="btn-group">
+                            <a href="<?php echo base_url('kompetisi/view/' . $item['id']); ?>" class="btn btn-info btn-sm" title="Info"><i class="fas fa-info-circle"></i></a>
+                            <a href="<?php echo base_url('kompetisi/edit/' . $item['id']); ?>" class="btn btn-warning btn-sm" title="Ubah"><i class="fas fa-edit"></i></a>
+                            <?php
+                            $disabled = $item['has_entries'];
+                            $title = $disabled ? 'Tidak dapat menghapus kompetisi yang sudah memiliki entri' : 'Hapus kompetisi';
+                            ?>
+                            <a href="<?php echo base_url('kompetisi/delete/' . $item['id']); ?>" class="btn btn-danger btn-sm <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Apakah Anda yakin ingin menghapus kompetisi ini?\')' ?>;"><i class="fas fa-trash"></i></a>
+                            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && isset($_SESSION['administrator_role_id']) && in_array($_SESSION['administrator_role_id'], $_SESSION['role_ids'])): ?>
+                            <a href="<?php echo base_url('kompetisi/results/' . $item['id']); ?>" class="btn btn-success btn-sm" title="Lihat Hasil"><i class="fas fa-poll"></i></a>
+                            <?php endif; ?>
+                          </div>
                         </td>
                       </tr>
                       <?php endforeach; ?>
