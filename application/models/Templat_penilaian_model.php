@@ -170,4 +170,11 @@ class Templat_penilaian_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete('skema_entri_templat');
     }
+
+    public function is_in_use($template_id)
+    {
+        $this->db->where('id_templat_penilaian', $template_id);
+        $this->db->from('kompetisi');
+        return $this->db->count_all_results() > 0;
+    }
 }

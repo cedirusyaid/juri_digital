@@ -7,12 +7,12 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian'); ?>">Evaluation Templates</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian'); ?>">Templat Penilaian</a></li>
               <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/view/' . $template['id']); ?>"><?php echo $template['nama_templat']; ?></a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/kategori_index/' . $template['id']); ?>">Categories</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/indikator_index/' . $template['id'] . '/' . $kategori['id']); ?>">Indicators</a></li>
-              <li class="breadcrumb-item active">Sub-Indicators</li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/kategori_index/' . $template['id']); ?>">Kategori</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/indikator_index/' . $template['id'] . '/' . $kategori['id']); ?>">Indikator</a></li>
+              <li class="breadcrumb-item active">Sub-Indikator</li>
             </ol>
           </div>
         </div>
@@ -26,9 +26,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Sub-Indicators for <?php echo $indikator['nama']; ?></h3>
+                <h3 class="card-title">Sub-Indikator untuk <?php echo $indikator['nama']; ?></h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('templat_penilaian/sub_indikator_create/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-primary btn-sm">Add New Sub-Indicator</a>
+                  <a href="<?php echo base_url('templat_penilaian/sub_indikator_create/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id']); ?>" class="btn btn-primary btn-sm">Tambah Sub-Indikator Baru</a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -54,9 +54,9 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Sub-Indicator Name</th>
-                    <th>Display Order</th>
-                    <th>Actions</th>
+                    <th>Nama Sub-Indikator</th>
+                    <th>Urutan Tampilan</th>
+                    <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -67,14 +67,14 @@
                         <td><?php echo $sub_indikator['nama']; ?></td>
                         <td><?php echo $sub_indikator['urutan_tampil']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_edit/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_delete/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this sub-indicator?')">Delete</a>
+                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_edit/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-warning btn-sm">Ubah</a>
+                          <a href="<?php echo base_url('templat_penilaian/sub_indikator_delete/' . $template['id'] . '/' . $kategori['id'] . '/' . $indikator['id'] . '/' . $sub_indikator['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus sub-indikator ini?')">Hapus</a>
                         </td>
                       </tr>
                       <?php endforeach; ?>
                   <?php else: ?>
                       <tr>
-                          <td colspan="4">No sub-indicators found for this indicator.</td>
+                          <td colspan="4">Tidak ada sub-indikator yang ditemukan untuk indikator ini.</td>
                       </tr>
                   <?php endif; ?>
                   </tbody>

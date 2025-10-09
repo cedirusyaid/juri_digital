@@ -7,10 +7,10 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-                    <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi/view/' . $kompetisi['id']); ?>">Competition Details</a></li>
-                    <li class="breadcrumb-item"><a href="<?php echo base_url('entri_lomba/index/' . $kompetisi['id']); ?>">Entries</a></li>
-                    <li class="breadcrumb-item active">Manage Judges</li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi/view/' . $kompetisi['id']); ?>">Detail Kompetisi</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url('entri_lomba/index/' . $kompetisi['id']); ?>">Entri</a></li>
+                    <li class="breadcrumb-item active">Kelola Juri</li>
                 </ol>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Assign Judges to Entry: <?php echo $entry['nama_karya']; ?> (Competition: <?php echo $kompetisi['nama']; ?>)</h3>
+                        <h3 class="card-title">Tugaskan Juri ke Entri: <?php echo $entry['nama_karya']; ?> (Kompetisi: <?php echo $kompetisi['nama']; ?>)</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -33,20 +33,20 @@
                         <?php if ($this->session->flashdata('success_message')): ?>
                             <div class="alert alert-success alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <h5><i class="icon fas fa-check"></i> Success!</h5>
+                                <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
                                 <?php echo $this->session->flashdata('success_message'); ?>
                             </div>
                         <?php endif; ?>
                         <?php if ($this->session->flashdata('error_message')): ?>
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <h5><i class="icon fas fa-ban"></i> Error!</h5>
+                                <h5><i class="icon fas fa-ban"></i> Gagal!</h5>
                                 <?php echo $this->session->flashdata('error_message'); ?>
                             </div>
                         <?php endif; ?>
 
                         <div class="form-group">
-                            <label>Available Judges</label>
+                            <label>Juri yang Tersedia</label>
                             <?php if (!empty($all_judges)): ?>
                                 <?php foreach ($all_judges as $judge): ?>
                                     <div class="form-check">
@@ -56,15 +56,15 @@
                                     </div>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <p class="text-muted">No judges found. Please create users with the 'Juri' role first.</p>
+                                <p class="text-muted">Tidak ada juri yang ditemukan. Silakan buat pengguna dengan peran 'Juri' terlebih dahulu.</p>
                             <?php endif; ?>
                         </div>
                     </div>
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <a href="<?php echo base_url('entri_lomba/index/' . $kompetisi['id']); ?>" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        <a href="<?php echo base_url('entri_lomba/index/' . $kompetisi['id']); ?>" class="btn btn-secondary">Batal</a>
                     </div>
                     <?php echo form_close(); ?>
                 </div>

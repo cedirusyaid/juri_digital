@@ -7,10 +7,10 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Competitions</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Kompetisi</a></li>
               <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi/view/' . $kompetisi['id']);?> "><?php echo $kompetisi['nama']; ?></a></li>
-              <li class="breadcrumb-item active">Create Entry</li>
+              <li class="breadcrumb-item active">Buat Entri</li>
             </ol>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div class="col-md-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Create New Entry for <?php echo $kompetisi['nama']; ?></h3>
+                <h3 class="card-title">Buat Entri Baru untuk <?php echo $kompetisi['nama']; ?></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -53,12 +53,12 @@
                   <?php echo validation_errors('<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
                   <div class="form-group">
-                    <label for="nama_karya">Entry Name</label>
-                    <input type="text" class="form-control" id="nama_karya" name="nama_karya" value="<?php echo set_value('nama_karya'); ?>" placeholder="Enter entry name" required>
+                    <label for="nama_karya">Nama Karya</label>
+                    <input type="text" class="form-control" id="nama_karya" name="nama_karya" value="<?php echo set_value('nama_karya'); ?>" placeholder="Masukkan nama karya" required>
                   </div>
                   <div class="form-group">
-                    <label for="deskripsi">Description</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Enter description"><?php echo set_value('deskripsi'); ?></textarea>
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Masukkan deskripsi"><?php echo set_value('deskripsi'); ?></textarea>
                   </div>
 
                   <hr>
@@ -92,7 +92,7 @@
                       </div>
                     <?php endforeach; ?>
                   <?php else: ?>
-                    <p class="text-muted">No specific entry details are required for this competition template.</p>
+                    <p class="text-muted">Tidak ada detail entri khusus yang diperlukan untuk templat kompetisi ini.</p>
                   <?php endif; ?>
 
 
@@ -100,8 +100,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <a href="<?php echo base_url('kompetisi/view/' . $kompetisi['id']); ?>" class="btn btn-secondary">Cancel</a>
+                  <button type="submit" class="btn btn-primary">Kirim</button>
+                  <a href="<?php echo base_url('kompetisi/view/' . $kompetisi['id']); ?>" class="btn btn-secondary">Batal</a>
                 </div>
               <?php echo form_close(); ?>
             </div>

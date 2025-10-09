@@ -7,9 +7,9 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-          <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian'); ?>">Assessment Templates</a></li>
-          <li class="breadcrumb-item active">Manage Schema</li>
+          <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian'); ?>">Templat Penilaian</a></li>
+          <li class="breadcrumb-item active">Kelola Skema</li>
         </ol>
       </div>
     </div>
@@ -23,9 +23,9 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Fields for <?php echo $template['nama_templat']; ?></h3>
+            <h3 class="card-title">Field untuk <?php echo $template['nama_templat']; ?></h3>
             <div class="card-tools">
-              <a href="<?php echo base_url('skema_entri/create/' . $id_templat_penilaian); ?>" class="btn btn-primary btn-sm">Add New Field</a>
+              <a href="<?php echo base_url('skema_entri/create/' . $id_templat_penilaian); ?>" class="btn btn-primary btn-sm">Tambah Field Baru</a>
             </div>
           </div>
           <!-- /.card-header -->
@@ -53,12 +53,12 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th>Order</th>
+                <th>Urutan</th>
                 <th>Label</th>
-                <th>Name (Key)</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Actions</th>
+                <th>Nama (Kunci)</th>
+                <th>Tipe</th>
+                <th>Wajib Diisi</th>
+                <th>Aksi</th>
               </tr>
               </thead>
               <tbody>
@@ -68,10 +68,10 @@
                 <td><?php echo $field['label_field']; ?></td>
                 <td><?php echo $field['nama_field']; ?></td>
                 <td><?php echo $field['tipe_field']; ?></td>
-                <td><?php echo $field['wajib_diisi'] ? 'Yes' : 'No'; ?></td>
+                <td><?php echo $field['wajib_diisi'] ? 'Ya' : 'Tidak'; ?></td>
                 <td>
-                  <a href="<?php echo base_url('skema_entri/edit/' . $field['id']); ?>" class="btn btn-warning btn-xs">Edit</a>
-                  <a href="<?php echo base_url('skema_entri/delete/' . $field['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this field?')">Delete</a>
+                  <a href="<?php echo base_url('skema_entri/edit/' . $field['id']); ?>" class="btn btn-warning btn-xs">Ubah</a>
+                  <a href="<?php echo base_url('skema_entri/delete/' . $field['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah Anda yakin ingin menghapus field ini?')">Hapus</a>
                 </td>
               </tr>
               <?php endforeach; ?>
@@ -80,7 +80,7 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            <a href="<?php echo base_url('templat_penilaian/view/' . $id_templat_penilaian); ?>" class="btn btn-secondary">Back to Template</a>
+            <a href="<?php echo base_url('templat_penilaian/view/' . $id_templat_penilaian); ?>" class="btn btn-secondary">Kembali ke Templat</a>
           </div>
         </div>
         <!-- /.card -->

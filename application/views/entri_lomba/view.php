@@ -40,24 +40,25 @@
                 </p>
                 <hr>
 
-                <strong><i class="fas fa-code mr-1"></i> Detail Karya (JSON)</strong>
-                <p class="text-muted">
-                  <pre><?php echo json_encode($detail_karya_decoded, JSON_PRETTY_PRINT); ?></pre>
-                </p>
-                <?php if (isset($detail_karya_decoded['url'])): ?>
-                <hr>
-                <strong><i class="fas fa-link mr-1"></i> URL</strong>
-                <p class="text-muted">
-                  <a href="<?php echo $detail_karya_decoded['url']; ?>" target="_blank"><?php echo $detail_karya_decoded['url']; ?></a>
-                </p>
-                <?php endif; ?>
-                <?php if (isset($detail_karya_decoded['screenshot'])): ?>
-                <hr>
-                <strong><i class="fas fa-image mr-1"></i> Screenshot</strong>
-                <p class="text-muted">
-                  <img src="<?php echo $detail_karya_decoded['screenshot']; ?>" style="max-width: 100%; height: auto;">
-                </p>
-                <?php endif; ?>
+                <strong><i class="fas fa-info-circle mr-1"></i> Detail Karya</strong>
+                <dl class="row">
+                  <?php if (is_array($detail_karya_decoded) && !empty($detail_karya_decoded)): ?>
+                    <?php foreach ($detail_karya_decoded as $key => $value): ?>
+                      <dt class="col-sm-4"><?php echo htmlspecialchars(ucfirst(str_replace('_', ' ', $key))); ?></dt>
+                      <dd class="col-sm-8">
+                        <?php 
+                          if (filter_var($value, FILTER_VALIDATE_URL)) {
+                            echo '<a href="' . htmlspecialchars($value) . '" target="_blank">' . htmlspecialchars($value) . '</a>';
+                          } else {
+                            echo htmlspecialchars($value);
+                          }
+                        ?>
+                      </dd>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <dd class="col-sm-12">No details provided.</dd>
+                  <?php endif; ?>
+                </dl>
 
                 <hr>
                 <strong><i class="far fa-clock mr-1"></i> Created At</strong>
@@ -80,56 +81,7 @@
             </div>
             <!-- /.card -->
 
-            <!-- Edit Detail Karya Form -->
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Edit Detail Karya</h3>
-              </div>
-              <!-- /.card-header -->
-              <?php if (!empty($skema_entri)): ?>
-                <!-- form start -->
-                <?php echo form_open('entri_lomba/update_detail_karya/' . $entry['id']); ?>
-                  <div class="card-body">
-                    <?php foreach ($skema_entri as $field): ?>
-                      <div class="form-group">
-                        <label for="<?php echo $field['nama_field']; ?>">
-                          <?php echo $field['label_field']; ?>
-                          <?php if ($field['wajib_diisi']): ?>
-                            <span class="text-danger">*</span>
-                          <?php endif; ?>
-                        </label>
-                        <?php 
-                          $current_value = isset($detail_karya_decoded[$field['nama_field']]) ? $detail_karya_decoded[$field['nama_field']] : '';
-                          $input_attributes = [
-                              'class' => 'form-control',
-                              'id'    => $field['nama_field'],
-                              'name'  => $field['nama_field'],
-                              'placeholder' => 'Enter ' . $field['label_field'],
-                          ];
-                          if ($field['wajib_diisi']) {
-                              $input_attributes['required'] = 'required';
-                          }
-                        ?>
-                        <?php if ($field['tipe_field'] == 'textarea'): ?>
-                          <textarea <?php echo implode(' ', array_map(function($key, $val){ return $key . '="' . htmlspecialchars($val) . '"'; }, array_keys($input_attributes), $input_attributes)); ?> rows="3"><?php echo htmlspecialchars($current_value); ?></textarea>
-                        <?php else: ?>
-                          <input type="<?php echo $field['tipe_field']; ?>" <?php echo implode(' ', array_map(function($key, $val){ return $key . '="' . htmlspecialchars($val) . '"'; }, array_keys($input_attributes), $input_attributes)); ?> value="<?php echo htmlspecialchars($current_value); ?>">
-                        <?php endif; ?>
-                      </div>
-                    <?php endforeach; ?>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Update Details</button>
-                  </div>
-                <?php echo form_close(); ?>
-              <?php else: ?>
-                <div class="card-body">
-                  <p class="text-muted">No specific entry details are configured for this competition template.</p>
-                </div>
-              <?php endif; ?>
-            </div>
-            <!-- /.card -->
+
 
           </div>
         </div>

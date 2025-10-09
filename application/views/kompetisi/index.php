@@ -3,12 +3,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><?php echo $title; ?></h1>
+            <h1>Manajemen Kompetisi</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item active"><?php echo $title; ?></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+              <li class="breadcrumb-item active">Manajemen Kompetisi</li>
             </ol>
           </div>
         </div>
@@ -22,9 +22,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">List of Competitions</h3>
+                <h3 class="card-title">Daftar Kompetisi</h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('kompetisi/create'); ?>" class="btn btn-primary btn-sm">Add New Competition</a>
+                  <a href="<?php echo base_url('kompetisi/create'); ?>" class="btn btn-primary btn-sm">Tambah Kompetisi Baru</a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -50,10 +50,10 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Competition Name</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Actions</th>
+                    <th>Nama Kompetisi</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -65,9 +65,13 @@
                         <td><?php echo $item['tanggal_mulai']; ?></td>
                         <td><?php echo $item['tanggal_selesai']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('kompetisi/view/' . $item['id']); ?>" class="btn btn-info btn-sm">View</a>
-                          <a href="<?php echo base_url('kompetisi/edit/' . $item['id']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="<?php echo base_url('kompetisi/delete/' . $item['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this competition?')">Delete</a>
+                          <a href="<?php echo base_url('kompetisi/view/' . $item['id']); ?>" class="btn btn-info btn-sm">Lihat</a>
+                          <a href="<?php echo base_url('kompetisi/edit/' . $item['id']); ?>" class="btn btn-warning btn-sm">Ubah</a>
+                          <?php
+                          $disabled = $item['has_entries'];
+                          $title = $disabled ? 'Tidak dapat menghapus kompetisi yang sudah memiliki entri' : 'Hapus kompetisi';
+                          ?>
+                          <a href="<?php echo base_url('kompetisi/delete/' . $item['id']); ?>" class="btn btn-danger btn-sm <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Apakah Anda yakin ingin menghapus kompetisi ini?\')' ?>;">Hapus</a>
                           <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === TRUE && isset($_SESSION['role_ids']) && isset($_SESSION['administrator_role_id']) && in_array($_SESSION['administrator_role_id'], $_SESSION['role_ids'])): ?>
                           <a href="<?php echo base_url('kompetisi/results/' . $item['id']); ?>" class="btn btn-success btn-sm">Lihat Hasil</a>
                           <?php endif; ?>
@@ -76,7 +80,7 @@
                       <?php endforeach; ?>
                   <?php else: ?>
                       <tr>
-                          <td colspan="5">No competitions found.</td>
+                          <td colspan="5">Tidak ada kompetisi yang ditemukan.</td>
                       </tr>
                   <?php endif; ?>
                   </tbody>

@@ -5,7 +5,7 @@
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">Daftar keanggotaan baru</p>
 
       <?php if ($this->session->flashdata('error_message')): ?>
           <div class="alert alert-danger" role="alert">
@@ -23,7 +23,7 @@
 
       <?php echo form_open('auth/register'); ?>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full name" name="nama" value="<?php echo set_value('nama'); ?>" required>
+          <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama" value="<?php echo set_value('nama'); ?>" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="kata_sandi" required>
+          <input type="password" class="form-control" placeholder="Kata Sandi" name="kata_sandi" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password" name="konfirmasi_kata_sandi" required>
+          <input type="password" class="form-control" placeholder="Ketik ulang kata sandi" name="konfirmasi_kata_sandi" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -59,19 +59,19 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
               <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
+               Saya setuju dengan <a href="#">ketentuan</a>
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
           </div>
           <!-- /.col -->
         </div>
       <?php echo form_close(); ?>
 
-      <a href="<?php echo base_url('auth/login'); ?>" class="text-center">I already have a membership</a>
+      <a href="<?php echo base_url('auth/login'); ?>" class="text-center">Saya sudah punya keanggotaan</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

@@ -20,7 +20,12 @@ class Kompetisi extends CI_Controller {
 
     public function index()
     {
-        $data['kompetisi'] = $this->kompetisi_model->get_kompetisi();
+        $kompetisi = $this->kompetisi_model->get_kompetisi();
+        foreach ($kompetisi as &$comp) {
+            $comp['has_entries'] = $this->kompetisi_model->has_entries($comp['id']);
+        }
+
+        $data['kompetisi'] = $kompetisi;
         $data['title'] = 'Competition Management';
         $data['logged_in'] = $this->session->userdata('logged_in');
         $data['username'] = $this->session->userdata('username');
@@ -135,6 +140,8 @@ class Kompetisi extends CI_Controller {
         if (empty($data['kompetisi'])) {
             show_404();
         }
+
+        $data['kompetisi']['has_entries'] = $this->kompetisi_model->has_entries($id);
 
         // Fetch template name if id_templat_penilaian is set
         if (!empty($data['kompetisi']['id_templat_penilaian'])) {

@@ -7,9 +7,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Competitions</a></li>
-              <li class="breadcrumb-item active">Create</li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Kompetisi</a></li>
+              <li class="breadcrumb-item active">Buat</li>
             </ol>
           </div>
         </div>
@@ -23,7 +23,7 @@
           <div class="col-md-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Create New Competition</h3>
+                <h3 class="card-title">Buat Kompetisi Baru</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -48,25 +48,25 @@
                   <?php echo validation_errors('<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
                   <div class="form-group">
-                    <label for="nama">Competition Name</label>
-                    <input type="text" class="form-control" id="nama" name="nama" value="<?php echo set_value('nama'); ?>" placeholder="Enter competition name" required>
+                    <label for="nama">Nama Kompetisi</label>
+                    <input type="text" class="form-control" id="nama" name="nama" value="<?php echo set_value('nama'); ?>" placeholder="Masukkan nama kompetisi" required>
                   </div>
                   <div class="form-group">
-                    <label for="deskripsi">Description</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Enter description"><?php echo set_value('deskripsi'); ?></textarea>
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Masukkan deskripsi"><?php echo set_value('deskripsi'); ?></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="tanggal_mulai">Start Date</label>
+                    <label for="tanggal_mulai">Tanggal Mulai</label>
                     <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="<?php echo set_value('tanggal_mulai'); ?>" required>
                   </div>
                   <div class="form-group">
-                    <label for="tanggal_selesai">End Date</label>
+                    <label for="tanggal_selesai">Tanggal Selesai</label>
                     <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" value="<?php echo set_value('tanggal_selesai'); ?>" required>
                   </div>
                   <div class="form-group">
-                    <label for="id_templat_penilaian">Evaluation Template</label>
+                    <label for="id_templat_penilaian">Templat Penilaian</label>
                     <select class="form-control" id="id_templat_penilaian" name="id_templat_penilaian">
-                      <option value="">-- Select Template --</option>
+                      <option value="">-- Pilih Templat --</option>
                       <?php foreach ($templates as $template): ?>
                         <option value="<?php echo $template['id']; ?>" <?php echo set_select('id_templat_penilaian', $template['id']); ?>><?php echo $template['nama_templat']; ?></option>
                       <?php endforeach; ?>
@@ -76,8 +76,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <a href="<?php echo base_url('kompetisi'); ?>" class="btn btn-secondary">Cancel</a>
+                  <button type="submit" class="btn btn-primary">Kirim</button>
+                  <a href="<?php echo base_url('kompetisi'); ?>" class="btn btn-secondary">Batal</a>
                 </div>
               <?php echo form_close(); ?>
             </div>

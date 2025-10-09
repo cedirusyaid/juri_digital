@@ -7,10 +7,10 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Competitions</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Kompetisi</a></li>
               <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi/view/' . $kompetisi['id']); ?>"><?php echo $kompetisi['nama']; ?></a></li>
-              <li class="breadcrumb-item active">Entries</li>
+              <li class="breadcrumb-item active">Entri</li>
             </ol>
           </div>
         </div>
@@ -24,9 +24,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">List of Entries for <?php echo $kompetisi['nama']; ?></h3>
+                <h3 class="card-title">Daftar Entri untuk <?php echo $kompetisi['nama']; ?></h3>
                 <div class="card-tools">
-                  <a href="<?php echo base_url('entri_lomba/create/' . $kompetisi['id']); ?>" class="btn btn-primary btn-sm">Add New Entry</a>
+                  <a href="<?php echo base_url('entri_lomba/create/' . $kompetisi['id']); ?>" class="btn btn-primary btn-sm">Tambah Entri Baru</a>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -52,9 +52,9 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Entry Name</th>
-                    <th>Description</th>
-                    <th>Actions</th>
+                    <th>Nama Karya</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -65,16 +65,16 @@
                         <td><?php echo $entry['nama_karya']; ?></td>
                         <td><?php echo $entry['deskripsi']; ?></td>
                         <td>
-                          <a href="<?php echo base_url('entri_lomba/view/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-info btn-sm">View</a>
-                          <a href="<?php echo base_url('entri_lomba/edit/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="<?php echo base_url('entri_lomba/manage_juri/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-primary btn-sm">Manage Judges</a>
-                          <a href="<?php echo base_url('entri_lomba/delete/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this entry?')">Delete</a>
+                          <a href="<?php echo base_url('entri_lomba/view/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-info btn-sm">Lihat</a>
+                          <a href="<?php echo base_url('entri_lomba/edit/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-warning btn-sm">Ubah</a>
+                          <a href="<?php echo base_url('entri_lomba/manage_juri/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-primary btn-sm">Kelola Juri</a>
+                          <a href="<?php echo base_url('entri_lomba/delete/' . $kompetisi['id'] . '/' . $entry['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus entri ini?')">Hapus</a>
                         </td>
                       </tr>
                       <?php endforeach; ?>
                   <?php else: ?>
                       <tr>
-                          <td colspan="4">No entries found for this competition.</td>
+                          <td colspan="4">Tidak ada entri yang ditemukan untuk kompetisi ini.</td>
                       </tr>
                   <?php endif; ?>
                   </tbody>

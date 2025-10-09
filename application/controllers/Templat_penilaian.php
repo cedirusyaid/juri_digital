@@ -20,7 +20,12 @@ class Templat_penilaian extends CI_Controller {
 
     public function index()
     {
-        $data['templates'] = $this->templat_penilaian_model->get_templates();
+        $templates = $this->templat_penilaian_model->get_templates();
+        foreach ($templates as &$template) {
+            $template['is_in_use'] = $this->templat_penilaian_model->is_in_use($template['id']);
+        }
+
+        $data['templates'] = $templates;
         $data['title'] = 'Evaluation Templates Management';
         $data['logged_in'] = $this->session->userdata('logged_in');
         $data['username'] = $this->session->userdata('username');
@@ -123,6 +128,8 @@ class Templat_penilaian extends CI_Controller {
         if (empty($data['template'])) {
             show_404();
         }
+
+        $data['template']['is_in_use'] = $this->templat_penilaian_model->is_in_use($id);
 
         // Fetch nested criteria
         $data['kategori_kriteria'] = $this->templat_penilaian_model->get_kategori_kriteria($id);

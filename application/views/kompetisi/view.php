@@ -6,11 +6,16 @@
             <h1><?php echo $title; ?></h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('kompetisi'); ?>">Competitions</a></li>
-              <li class="breadcrumb-item active">Details</li>
-            </ol>
+            <div class="btn-group float-sm-right">
+              <a href="<?php echo base_url('kompetisi'); ?>" class="btn btn-secondary">Back to List</a>
+              <a href="<?php echo base_url('kompetisi/edit/' . $kompetisi['id']); ?>" class="btn btn-warning">Edit Competition</a>
+              <a href="<?php echo base_url('entri_lomba/index/' . $kompetisi['id']); ?>" class="btn btn-info">Manage Entries</a>
+              <?php
+              $disabled = $kompetisi['has_entries'];
+              $title = $disabled ? 'Cannot delete competition with entries' : 'Delete competition';
+              ?>
+              <a href="<?php echo base_url('kompetisi/delete/' . $kompetisi['id']); ?>" class="btn btn-danger <?php echo $disabled ? 'disabled' : '' ?>" title="<?php echo $title; ?>" onclick="return <?php echo $disabled ? 'false' : 'confirm(\'Are you sure you want to delete this competition?\')' ?>;">Delete Competition</a>
+            </div>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -68,13 +73,7 @@
                   <?php echo $kompetisi['diperbarui_pada']; ?>
                 </p>
               </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <a href="<?php echo base_url('kompetisi'); ?>" class="btn btn-secondary">Back to List</a>
-                <a href="<?php echo base_url('kompetisi/edit/' . $kompetisi['id']); ?>" class="btn btn-warning">Edit Competition</a>
-                <a href="<?php echo base_url('entri_lomba/index/' . $kompetisi['id']); ?>" class="btn btn-info">Manage Entries</a> <!-- New button -->
-                <a href="<?php echo base_url('kompetisi/delete/' . $kompetisi['id']); ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this competition?')">Delete Competition</a>
-              </div>
+
             </div>
             <!-- /.card -->
           </div>

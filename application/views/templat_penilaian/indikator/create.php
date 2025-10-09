@@ -7,11 +7,11 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian'); ?>">Evaluation Templates</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian'); ?>">Templat Penilaian</a></li>
               <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/view/' . $template['id']); ?>"><?php echo $template['nama_templat']; ?></a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/kategori_index/' . $template['id']); ?>">Categories</a></li>
-              <li class="breadcrumb-item active">Create Indicator</li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('templat_penilaian/kategori_index/' . $template['id']); ?>">Kategori</a></li>
+              <li class="breadcrumb-item active">Buat Indikator</li>
             </ol>
           </div>
         </div>
@@ -25,7 +25,7 @@
           <div class="col-md-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Create New Indicator for <?php echo $kategori['nama']; ?></h3>
+                <h3 class="card-title">Buat Indikator Baru untuk <?php echo $kategori['nama']; ?></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -50,19 +50,19 @@
                   <?php echo validation_errors('<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
                   <div class="form-group">
-                    <label for="nama">Indicator Name</label>
-                    <input type="text" class="form-control" id="nama" name="nama" value="<?php echo set_value('nama'); ?>" placeholder="Enter indicator name" required>
+                    <label for="nama">Nama Indikator</label>
+                    <input type="text" class="form-control" id="nama" name="nama" value="<?php echo set_value('nama'); ?>" placeholder="Masukkan nama indikator" required>
                   </div>
                   <div class="form-group">
-                    <label for="bobot">Weight</label>
-                    <input type="number" step="0.01" class="form-control" id="bobot" name="bobot" value="<?php echo set_value('bobot'); ?>" placeholder="Enter weight (e.g., 0.5)" required>
+                    <label for="bobot">Bobot</label>
+                    <input type="number" step="0.01" class="form-control" id="bobot" name="bobot" value="<?php echo set_value('bobot'); ?>" placeholder="Masukkan bobot (contoh: 0.5)" required>
                   </div>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <a href="<?php echo base_url('templat_penilaian/view/' . $template['id']); ?>" class="btn btn-secondary">Cancel</a>
+                  <button type="submit" class="btn btn-primary">Kirim</button>
+                  <a href="<?php echo base_url('templat_penilaian/view/' . $template['id']); ?>" class="btn btn-secondary">Batal</a>
                 </div>
               <?php echo form_close(); ?>
             </div>

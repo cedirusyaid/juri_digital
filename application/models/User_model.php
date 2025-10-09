@@ -117,4 +117,11 @@ class User_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete('users');
     }
+
+    public function has_juri_assignments($user_id)
+    {
+        $this->db->where('juri_id', $user_id);
+        $this->db->from('juri_entri_lomba');
+        return $this->db->count_all_results() > 0;
+    }
 }

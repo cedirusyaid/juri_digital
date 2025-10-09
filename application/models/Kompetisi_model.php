@@ -78,4 +78,11 @@ class Kompetisi_model extends CI_Model {
         return array_values($result);
     }
 
+    public function has_entries($kompetisi_id)
+    {
+        $this->db->where('id_kompetisi', $kompetisi_id);
+        $this->db->from('entri_lomba');
+        return $this->db->count_all_results() > 0;
+    }
+
 }

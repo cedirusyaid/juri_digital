@@ -90,16 +90,25 @@ class Entri_lomba extends CI_Controller {
     {
         $data['kompetisi'] = $this->kompetisi_model->get_kompetisi($kompetisi_id);
         $data['entry'] = $this->entri_lomba_model->get_entries(FALSE, $id);
-        if (empty($data['kompetisi']) || empty($data['entry'])) {
-            show_404();
+
+        if (empty($data['kompetisi']) || empty($data['entry']) || empty($data['kompetisi']['id_templat_penilaian'])) {
+            $this->session->set_flashdata('error_message', 'This competition or entry is invalid or does not have an assessment template with an entry schema.');
+            redirect('kompetisi/view/' . $kompetisi_id);
         }
 
+        $data['skema_entri'] = $this->templat_penilaian_model->get_skema_entri($data['kompetisi']['id_templat_penilaian']);
+        $data['detail_karya_decoded'] = json_decode($data['entry']['detail_karya'], TRUE);
         $data['title'] = 'Edit Entry for ' . $data['kompetisi']['nama'];
         $data['logged_in'] = $this->session->userdata('logged_in');
         $data['username'] = $this->session->userdata('username');
         $data['roles'] = $this->session->userdata('roles');
 
         $this->form_validation->set_rules('nama_karya', 'Entry Name', 'required');
+        foreach ($data['skema_entri'] as $field) {
+            if ($field['wajib_diisi']) {
+                $this->form_validation->set_rules($field['nama_field'], $field['label_field'], 'required');
+            }
+        }
 
         if ($this->form_validation->run() === FALSE)
         {
@@ -109,10 +118,15 @@ class Entri_lomba extends CI_Controller {
         }
         else
         {
-            // This edit method only handles basic fields. Detail Karya is handled by update_detail_karya.
+            $detail_karya = [];
+            foreach ($data['skema_entri'] as $field) {
+                $detail_karya[$field['nama_field']] = $this->input->post($field['nama_field']);
+            }
+
             $entry_data = [
                 'nama_karya' => $this->input->post('nama_karya'),
                 'deskripsi' => $this->input->post('deskripsi'),
+                'detail_karya' => $detail_karya, // Model will encode
             ];
 
             if ($this->entri_lomba_model->update_entry($id, $entry_data)) {
