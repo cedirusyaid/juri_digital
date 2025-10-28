@@ -210,7 +210,7 @@ class Penilaian_model extends CI_Model {
     public function get_assessment_details_for_form($kompetisi_id, $entri_lomba_id, $user_id)
     {
         $this->db->select(
-            'k.id as kompetisi_id, k.nama as kompetisi_nama, k.id_templat_penilaian,'
+            'k.id as kompetisi_id, k.nama as kompetisi_nama, k.id_templat_penilaian, k.tanggal_selesai,'
             .'el.id as entri_id, el.nama_karya, el.deskripsi, el.detail_karya,'
             .'p.id as penilaian_id, p.status, p.dikirim_pada,'
             .'kk.id as kategori_id, kk.nama as kategori_nama, kk.bobot as kategori_bobot,'
@@ -249,7 +249,8 @@ class Penilaian_model extends CI_Model {
                 $result['kompetisi'] = [
                     'id' => $row['kompetisi_id'],
                     'nama' => $row['kompetisi_nama'],
-                    'id_templat_penilaian' => $row['id_templat_penilaian']
+                    'id_templat_penilaian' => $row['id_templat_penilaian'],
+                    'tanggal_selesai' => $row['tanggal_selesai']
                 ];
             }
             if (empty($result['entri'])) {

@@ -101,3 +101,34 @@
     b. Notifikasi email kepada juri ketika ada tugas penilaian baru.
     c. Halaman publik untuk menampilkan pemenang dari setiap kompetisi.
     d. Kustomisasi tema dan tampilan yang lebih mendalam.
+
+
+**BAB VI: LOG PERUBAHAN**
+
+Tanggal: 28 Oktober 2025
+
+    Berikut adalah rincian perubahan dan perbaikan yang telah diimplementasikan:
+
+    6.1. **Fungsionalitas Batas Waktu Penilaian**
+        - **Deskripsi**: Mengimplementasikan mekanisme untuk mencegah juri melakukan atau mengubah penilaian setelah tanggal selesai kompetisi terlewati.
+        - **Detail Teknis**: Logika ditambahkan pada controller `Penilaian.php` di metode `assess()` untuk memeriksa tanggal. Jika waktu sudah lewat, semua form input (skor, catatan) dan tombol (simpan, kirim) pada halaman `penilaian/assess.php` akan dinonaktifkan secara otomatis.
+
+    6.2. **Perbaikan Bug Keterbacaan `tanggal_selesai`**
+        - **Deskripsi**: Memperbaiki bug kritis di mana form penilaian tetap aktif meskipun waktu kompetisi sudah berakhir.
+        - **Akar Masalah**: Ditemukan bahwa query pada model `Penilaian_model.php` dalam metode `get_assessment_details_for_form()` tidak mengambil kolom `tanggal_selesai` dari tabel `kompetisi`.
+        - **Solusi**: Query dan array hasil pada metode tersebut telah dimodifikasi untuk memastikan `tanggal_selesai` selalu tersedia, sehingga logika penguncian form dapat berjalan dengan benar.
+
+    6.3. **Pemisahan Tampilan Penilaian Aktif dan Arsip**
+        - **Deskripsi**: Halaman daftar penilaian juri (`penilaian/index`) diubah agar secara default hanya menampilkan kompetisi yang masih aktif.
+        - **Fitur Baru**: Ditambahkan tombol "Arsip Penilaian" yang memungkinkan juri untuk melihat riwayat penilaian dari kompetisi yang telah berakhir.
+        - **Detail Teknis**: Logika pada metode `index()` di controller `Penilaian.php` diperbarui untuk memfilter kompetisi berdasarkan tanggal dan parameter GET `?tampilkan=arsip`.
+
+    6.4. **Peningkatan Visual Status Penilaian**
+        - **Deskripsi**: Memperbarui pewarnaan label status pada halaman daftar penilaian untuk memberikan indikasi visual yang lebih jelas.
+        - **Perubahan**: 
+            - Status 'terkirim' kini berwarna hijau (`badge-success`).
+            - Status 'draft' dan 'belum dinilai' kini berwarna kuning (`badge-warning`).
+
+    6.5. **Persiapan Fitur Analisis AI**
+        - **Deskripsi**: Menambahkan tombol "Analisa AI" pada halaman detail hasil entri (`kompetisi/entry_results.php`).
+        - **Fungsionalitas**: Tombol ini mengarahkan pengguna ke halaman baru (`kompetisi/analyze_assessments`) yang secara otomatis membuat *prompt* (teks perintah) berdasarkan semua data penilaian (skor dan catatan dari semua juri) untuk entri tersebut. Pengguna dapat menyalin *prompt* ini untuk digunakan pada model AI generatif.

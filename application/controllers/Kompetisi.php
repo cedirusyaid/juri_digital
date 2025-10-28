@@ -250,4 +250,44 @@ class Kompetisi extends CI_Controller {
         $this->load->view('kompetisi/results_pdf', $data);
     }
 
+    public function analyze_assessments($entry_id = NULL)
+    {
+        if ($entry_id === NULL) {
+            redirect('kompetisi');
+        }
+
+        $data['entry'] = $this->entri_lomba_model->get_entries(FALSE, $entry_id);
+        if (empty($data['entry'])) {
+            show_404();
+        }
+
+        $data['kompetisi'] = $this->kompetisi_model->get_kompetisi($data['entry']['id_kompetisi']);
+        if (empty($data['kompetisi'])) {
+            show_404();
+        }
+
+        $data['title'] = 'Analisis Penilaian AI';
+        $data['assessments'] = $this->penilaian_model->get_detailed_assessment_for_entry($data['entry']['id_kompetisi'], $entry_id);
+
+        // For now, we just pass the data to a view.
+        // The actual AI analysis logic will be added here later.
+        $analysis_prompt = "Berikut adalah data penilaian untuk karya '{$data['entry']['nama_karya']}' dalam kompetisi '{$data['kompetisi']['nama']}'. \n\n";
+        
+        foreach ($data['assessments'] as $assessment) {
+            $analysis_prompt .= "Juri: {$assessment['nama_juri']}\n";
+            foreach ($assessment['detail_kriteria'] as $detail) {
+                $analysis_prompt .= "- Kategori: {$detail['kategori_nama']}, Indikator: {$detail['indikator_nama']}, Sub-Indikator: {$detail['sub_indikator_nama']}, Skor: {$detail['skor']}, Catatan: {$detail['catatan']}\n";
+            }
+            $analysis_prompt .= "\n";
+        }
+
+        $analysis_prompt .= "Berikan analisis mendalam dari data di atas. Identifikasi kekuatan dan kelemahan utama karya ini berdasarkan skor dan catatan dari para juri. Berikan juga saran perbaikan yang konkret.";
+
+        $data['analysis_prompt'] = $analysis_prompt;
+
+        $this->load->view('templates/adminlte_header', $data);
+        $this->load->view('kompetisi/analyze_assessments', $data);
+        $this->load->view('templates/adminlte_footer');
+    }
+
 }

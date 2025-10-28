@@ -2,7 +2,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Penilaian Saya <small>Daftar Entri Lomba yang Ditugaskan</small></h1>
+            <h1><?php echo $title; ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -15,6 +15,17 @@
     </section>
 
     <section class="content">
+        <div class="mb-3">
+            <div class="btn-group" role="group">
+                <a href="<?php echo site_url('penilaian/index'); ?>" class="btn <?php echo !$show_past ? 'btn-primary' : 'btn-outline-primary'; ?>">
+                    <i class="fas fa-play-circle"></i> Penilaian Aktif
+                </a>
+                <a href="<?php echo site_url('penilaian/index?tampilkan=arsip'); ?>" class="btn <?php echo $show_past ? 'btn-primary' : 'btn-outline-primary'; ?>">
+                    <i class="fas fa-archive"></i> Arsip Penilaian
+                </a>
+            </div>
+        </div>
+
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Daftar Penilaian</h3>
@@ -61,14 +72,14 @@
                                                         <?php
                                                             $status_class = '';
                                                             if ($entry['assessment_status'] == 'terkirim') {
-                                                                $status_class = 'label-success';
+                                                                $status_class = 'badge badge-success';
                                                             } elseif ($entry['assessment_status'] == 'draft') {
-                                                                $status_class = 'label-warning';
-                                                            } else {
-                                                                $status_class = 'label-default';
+                                                                $status_class = 'badge badge-warning';
+                                                            } else { // belum dinilai
+                                                                $status_class = 'badge badge-warning';
                                                             }
                                                         ?>
-                                                        <span class="label <?php echo $status_class; ?>">
+                                                        <span class="<?php echo $status_class; ?>">
                                                             <?php echo ucfirst($entry['assessment_status']); ?>
                                                         </span>
                                                     </td>

@@ -27,34 +27,45 @@ class Penilaian extends CI_Controller {
     public function index()
     {
         $user_id = $this->session->userdata('user_id');
-        $data['title'] = 'Penilaian Saya';
+        $show_past = $this->input->get('tampilkan') === 'arsip';
 
-        // Get all competitions
+        $data['title'] = $show_past ? 'Arsip Penilaian Saya' : 'Penilaian Saya (Aktif)';
+        $data['show_past'] = $show_past;
+
         $all_kompetisi = $this->Kompetisi_model->get_kompetisi();
-        $data['kompetisi_list'] = [];
+        $active_competitions = [];
+        $past_competitions = [];
+        $current_date = date('Y-m-d');
 
         foreach ($all_kompetisi as $kompetisi) {
-            // Get entries assigned to this judge for this competition
             $assigned_entries_raw = $this->Penilaian_model->get_assigned_entries_for_judge_in_competition($user_id, $kompetisi['id']);
             $assigned_entry_ids = array_column($assigned_entries_raw, 'entri_lomba_id');
 
             if (!empty($assigned_entry_ids)) {
                 $entries_for_competition = [];
                 foreach ($assigned_entry_ids as $entry_id) {
-                    $entry_details = $this->Entri_lomba_model->get_entries(FALSE, $entry_id); // Get single entry details
+                    $entry_details = $this->Entri_lomba_model->get_entries(FALSE, $entry_id);
                     if ($entry_details) {
-                        // Get assessment status for this entry
                         $assessment = $this->Penilaian_model->get_assessments($kompetisi['id'], $entry_id, $user_id);
                         $entry_details['assessment_status'] = !empty($assessment) ? $assessment[0]['status'] : 'belum dinilai';
                         $entries_for_competition[] = $entry_details;
                     }
                 }
+
                 if (!empty($entries_for_competition)) {
                     $kompetisi['entries'] = $entries_for_competition;
-                    $data['kompetisi_list'][] = $kompetisi;
+                    $is_past = $kompetisi['tanggal_selesai'] && $current_date > $kompetisi['tanggal_selesai'];
+
+                    if ($is_past) {
+                        $past_competitions[] = $kompetisi;
+                    } else {
+                        $active_competitions[] = $kompetisi;
+                    }
                 }
             }
         }
+
+        $data['kompetisi_list'] = $show_past ? $past_competitions : $active_competitions;
 
         $this->load->view('templates/adminlte_header', $data);
         $this->load->view('penilaian/index', $data);
@@ -80,11 +91,12 @@ class Penilaian extends CI_Controller {
         $competition_end_date = isset($assessment_data['kompetisi']['tanggal_selesai']) ? $assessment_data['kompetisi']['tanggal_selesai'] : null;
         $current_date = date('Y-m-d');
 
-        $data['assessment_ended'] = FALSE;
+        $assessment_ended = FALSE;
         if ($competition_end_date && $current_date > $competition_end_date) {
-            $data['assessment_ended'] = TRUE;
+            $assessment_ended = TRUE;
             $this->session->set_flashdata('error', 'Periode penilaian untuk kompetisi ini telah berakhir pada tanggal ' . date('d-m-Y', strtotime($competition_end_date)) . '. Anda tidak dapat lagi melakukan penilaian.');
         }
+        $data['assessment_ended'] = $assessment_ended;
 
         // Filter criteria based on judge's indicator assignments
         $assigned_indicators = $this->Penilaian_model->get_assigned_indicators_for_judge_in_competition($user_id, $kompetisi_id);

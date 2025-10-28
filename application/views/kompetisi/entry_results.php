@@ -14,6 +14,11 @@
             </ol>
           </div>
         </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <a href="<?php echo site_url('kompetisi/analyze_assessments/' . $entri['id']); ?>" class="btn btn-primary"><i class="fas fa-magic"></i> Analisa AI</a>
+            </div>
+        </div>
       </div><!-- /.container-fluid -->
     </section>
 
