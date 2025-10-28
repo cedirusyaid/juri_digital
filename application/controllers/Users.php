@@ -19,18 +19,11 @@ class Users extends CI_Controller {
 
     public function index()
     {
-        $users = $this->user_model->get_users();
-        foreach ($users as &$user) {
-            $user['roles'] = $this->user_model->get_user_roles($user['id']);
-            $user['has_juri_assignments'] = $this->user_model->has_juri_assignments($user['id']);
-        }
-
-        $data['users'] = $users;
+        $data['users'] = $this->user_model->get_users();
         $data['title'] = 'Users Management';
         $data['logged_in'] = $this->session->userdata('logged_in');
         $data['username'] = $this->session->userdata('username');
-
-        $this->load->view('templates/adminlte_header', $data);
+$this->load->view('templates/adminlte_header', $data);
         $this->load->view('users/index', $data);
         $this->load->view('templates/adminlte_footer');
     }

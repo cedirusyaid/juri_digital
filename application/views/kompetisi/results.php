@@ -19,6 +19,10 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Ringkasan Hasil</h3>
+                <div class="box-tools pull-right">
+                  <a href="<?php echo site_url('kompetisi/download_results/' . $kompetisi['id']); ?>" class="btn btn-primary btn-sm">Download Hasil (CSV)</a>
+                  <a href="<?php echo site_url('kompetisi/download_results_pdf/' . $kompetisi['id']); ?>" class="btn btn-danger btn-sm">Download Hasil (PDF)</a>
+                </div>
             </div>
             <div class="box-body">
                 <?php if ($this->session->flashdata('success')): ?>

@@ -197,4 +197,57 @@ class Kompetisi extends CI_Controller {
         $this->load->view('templates/adminlte_footer');
     }
 
+    public function download_results($kompetisi_id = NULL)
+    {
+        if ($kompetisi_id === NULL) {
+            redirect('kompetisi');
+        }
+
+        $kompetisi = $this->kompetisi_model->get_kompetisi($kompetisi_id);
+        if (empty($kompetisi)) {
+            show_404();
+        }
+
+        $summary = $this->penilaian_model->get_assessment_summary_by_competition($kompetisi_id);
+
+        $filename = 'hasil_kompetisi_' . str_replace(' ', '_', strtolower($kompetisi['nama'])) . '.csv';
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+        $output = fopen('php://output', 'w');
+
+        fputcsv($output, array('Peringkat', 'Nama Karya', 'Rata-rata Skor', 'Jumlah Juri Menilai'));
+
+        if (!empty($summary)) {
+            $rank = 1;
+            foreach ($summary as $row) {
+                fputcsv($output, array(
+                    $rank++,
+                    $row['nama_karya'],
+                    number_format($row['rata_rata_skor'], 2),
+                    $row['jumlah_juri_menilai']
+                ));
+            }
+        }
+
+        fclose($output);
+    }
+
+    public function download_results_pdf($kompetisi_id = NULL)
+    {
+        if ($kompetisi_id === NULL) {
+            redirect('kompetisi');
+        }
+
+        $data['kompetisi'] = $this->kompetisi_model->get_kompetisi($kompetisi_id);
+        if (empty($data['kompetisi'])) {
+            show_404();
+        }
+
+        $data['summary'] = $this->penilaian_model->get_assessment_summary_by_competition($kompetisi_id);
+
+        $this->load->view('kompetisi/results_pdf', $data);
+    }
+
 }

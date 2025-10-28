@@ -82,7 +82,7 @@ class Entri_lomba extends CI_Controller {
             } else {
                 $this->session->set_flashdata('error_message', 'Failed to create entry.');
             }
-            redirect('kompetisi/view/' . $kompetisi_id);
+            redirect('entri_lomba/index/' . $kompetisi_id);
         }
     }
 
@@ -134,7 +134,7 @@ class Entri_lomba extends CI_Controller {
             } else {
                 $this->session->set_flashdata('error_message', 'Failed to update entry.');
             }
-            redirect('kompetisi/view/' . $kompetisi_id);
+            redirect('entri_lomba/view/' . $kompetisi_id . '/' . $id);
         }
     }
 
